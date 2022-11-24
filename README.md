@@ -14,6 +14,18 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
+### `npm start` (For the server)
+
+move to 'server' directory and run npm start to launch the server
+
+###  `docker-compose up` (DataBase)
+move to 'mongoDB' directory and run docker-compose up to run the database container
+
+### `docker exec -it mongoPaint bash || mongo`
+
+to interact|enter the container ('mongoPaint' is the container-name); 
+Inside the container you can run 'mongosh' to interract with the database;
+
 ### `npm test`
 
 Launches the test runner in the interactive watch mode.\
@@ -68,3 +80,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+

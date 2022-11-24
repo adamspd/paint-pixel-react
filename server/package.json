@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "paint pixel server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adamspd/paint-pixel-react.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/adamspd/paint-pixel-react/issues"
+  },
+  "homepage": "https://github.com/adamspd/paint-pixel-react#readme",
+  "dependencies": {
+    "mongoose": "^6.7.3"
+  }
+}
