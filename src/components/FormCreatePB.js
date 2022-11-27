@@ -1,5 +1,5 @@
 import React from 'react'
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import axios from '../axios'
 
 
@@ -9,82 +9,66 @@ const CREATE_PIXELBOARD_URL = '/creasePB'
 function FormCreatePB() {
 
     const titleRef = useRef();
-    // const {inputFocus, setInputFocus} = useState(false);
     const [ title, setTile ] = useState('');
-    const [ author, setAuthor ] = useState('');
-    const [ dealine, setDealine ] = useState('');
+    const [ author, setAuthor ] = useState('6380e75cd3eebc1a416fe876');
+    const [ dealine, setDealine ] = useState(new Date());
+    const [ isValidDeadline, setIsValidDeadline ] = useState(false);
     const [ statut, setStatut ] = useState(false);
-    const [ boardSize, setBoardSize ] = useState('');
-  //  const [ author, setAuthor ] = useState('');
-    const [ pixelModification, setPixelModification ] = useState('');
+    const [ boardSize, setBoardSize ] = useState(0);
+    const [ pixelModification, setPixelModification ] = useState(false);
     const [timeLimit, setTimeLimit] = useState(false);
   
   
-    // useEffect(()=> {
-    //     titleRef.current.focus()  
-    // }, []);
+    useEffect(()=> {
+        titleRef.current.focus() ;
+    }, []);
  
   
-    // useEffect(()=>{
+    useEffect(()=>{
   
-    //   setPassword(password);
-    //   setUserName(userName);
-    //   setConfirmPassword(confirmPassword);
-    //   setFirstName(firstName);
-    //   setLastName(lastName);
+      setTile(title);
+      setStatut(statut);
+      setBoardSize(boardSize);
+      setPixelModification(pixelModification);
+      setTimeLimit(timeLimit);
   
-    // }, [password, userName, confirmPassword, firstName, lastName]);
+    }, [title, dealine, isValidDeadline, statut, boardSize, pixelModification, timeLimit]);
   
-    // useEffect(()=> {
-    //   password === confirmPassword ? setIsPasswordValid(true) : setIsPasswordValid(false)
-  
-  
-    // }, [password, confirmPassword]);
+    useEffect(()=> {
+      (new Date(dealine) <= new Date()) ? setIsValidDeadline(true) : setIsValidDeadline(false);  
+    }, [dealine]);
   
 
 
-    // title: String,
-    // statut: { type: Boolean, default: false},
-    // createdAt: { type: Date, default: Date.now},
-    // dealine: { type: Date},
-    // boardSize: {type: Number, required: true},
-    // author: { type: Schema.Types.ObjectId, ref: 'User'},
-    // pixelModification: {type: Boolean, required: true},
-    // timeLimit: {type: Number, required: true},
+    const handleSubmit = async (e) => {
+      try {
+        console.log("ici react");
+        const response = await axios.post(CREATE_PIXELBOARD_URL, JSON.stringify({title, statut, dealine, boardSize, author, pixelModification, timeLimit }), 
+            {
+                headers: { 'Content-Type': 'application/json'},
+                withCredentials: true
+            }
+        );
+        console.log("ici react 1");
+        console.log(response.data);
 
 
-
-
-  //   const handleSubmit = async () => {
-  //     try {
-  //       const response = await axios.post(CREATE_PIXELBOARD_URL, JSON.stringify({title, statut, dealine, boardSize, author, pixelModification, timeLimit }), 
-  //           {
-  //               headers: { 'Content-Type': 'application/json'},
-  //               withCredentials: true
-  //           }
-  //       );
-  
-  //       console.log(response.data);
-  //       // ou full answer
-  //    //  console.log(JSON.stringify(response));
-  //     setSuccess(true);
-  //      // clear input fields
    
-  //  } catch (error) {
-  //      if (!error?.response){
-  //          setErrMsg('No Server Response'+ error);
-  //      }
-  //      else if(error.response?.status === 600){
-  //          setErrMsg("Password shouldn't contain parts of the username");
-  //      }
-  //      else{
-  //          setErrMsg('Erreuuuuur');
-  //      }
+   } catch (error) {
+    console.log("ici react error");
+       if (!error?.response){
+           console.log('No Server Response'+ error);
+       }
+       else if(error.response?.status === 600){
+        console.log("Password shouldn't contain parts of the username");
+       }
+       else{
+        console.log('Erreuuuuur');
+       }
        
        
-  //  }
-  //   }
-
+   }
+    }
 
 
 
@@ -92,7 +76,7 @@ function FormCreatePB() {
     <section>
       <h1>Create Pixel Board</h1>
       <div>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div>
             <label htmlFor='title'>title :</label>
             <input
@@ -100,11 +84,8 @@ function FormCreatePB() {
             type='text'
             ref={titleRef}
             autoComplete='off'
-          //  onFocus={() => {setInputFocus(true)}}
-           // onBlur={() => {setInputFocus(false)}}
             value={title}
             onChange={(e)=> setTile(e.target.value)}
-          //  onChange={}
           >
             </input>
           </div>
@@ -114,12 +95,8 @@ function FormCreatePB() {
             <input
             id='statut'
             type='checkbox'
-            // required={true}
-          //  onFocus={() => {setInputFocus(true)}}
-           // onBlur={() => {setInputFocus(false)}}
             value={statut}
             onChange={(e)=> setStatut(e.target.value)}
-          //  onChange={}
           >
             </input>
           </div>
@@ -130,11 +107,8 @@ function FormCreatePB() {
             id='dealine'
             type='date'
             autoComplete='off'
-          //  onFocus={() => {setInputFocus(true)}}
-           // onBlur={() => {setInputFocus(false)}}
             value={dealine}
             onChange={(e)=> setDealine(e.target.value)}
-          //  onChange={}
           >
             </input>
           </div>
@@ -188,7 +162,7 @@ function FormCreatePB() {
           </input>
           </div>
           <div>
-            <button className='createPixelBoardButton'>Submit</button>
+            <button  disabled = { (!isValidDeadline ) ? false : true} className='createPixelBoardButton'>Submit</button>
 
           </div>
 
