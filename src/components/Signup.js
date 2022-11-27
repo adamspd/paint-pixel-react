@@ -7,15 +7,14 @@ const CREATE_USER_URL = '/creaseUser'
 
 function Signup() {
   const userNameInput = useRef();
-  // const {inputFocus, setInputFocus} = useState(false);
+
   const [ userName, setUserName ] = useState('');
   const [ firstName, setFirstName ] = useState('');
   const [ lastName, setLastName ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ confirmPassword, setConfirmPassword ] = useState('');
   const [isPasswordValid, setIsPasswordValid] = useState(false);
-  const [ Success, setSuccess] = useState(false)
-  const [ ErrMsg, setErrMsg] = useState('')
+
 
 
   useEffect(()=> {
@@ -39,7 +38,8 @@ function Signup() {
 
   }, [password, confirmPassword]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+  //  e.preventDefault();
     try {
       const response = await axios.post(CREATE_USER_URL, JSON.stringify({userName, password, firstName, lastName }), 
           {
@@ -49,20 +49,18 @@ function Signup() {
       );
 
       console.log(response.data);
-      // ou full answer
-   //  console.log(JSON.stringify(response));
-    setSuccess(true);
-     // clear input fields
+      console.log(response.data());
+
  
  } catch (error) {
      if (!error?.response){
-         setErrMsg('No Server Response'+ error);
+         console.log('No Server Response'+ error);
      }
      else if(error.response?.status === 600){
-         setErrMsg("Password shouldn't contain parts of the username");
+      console.log("Password shouldn't contain parts of the username");
      }
      else{
-         setErrMsg('Erreuuuuur');
+      console.log('Erreuuuuur');
      }
      
      
@@ -101,11 +99,9 @@ function Signup() {
             type='text'
             autoComplete='off'
             required={true}
-          //  onFocus={() => {setInputFocus(true)}}
-           // onBlur={() => {setInputFocus(false)}}
             value={firstName}
             onChange={(e)=> setFirstName(e.target.value)}
-          //  onChange={}
+
           >
             </input>
           </div>
@@ -116,11 +112,9 @@ function Signup() {
             id='lastName'
             type='text'
             autoComplete='off'
-          //  onFocus={() => {setInputFocus(true)}}
-           // onBlur={() => {setInputFocus(false)}}
+
             value={lastName}
             onChange={(e)=> setLastName(e.target.value)}
-          //  onChange={}
           >
             </input>
           </div>
