@@ -13,22 +13,17 @@ const bcrypt = require("bcryptjs");
 
 
 const app = express();
-// connexion to DataBase
 connectDB();
 const PORT = 3500;
 
-// erreur de network car on est en local sur 2 port differents
+
 app.use(cors({origin: true, credentials: true}));
 
-// For parsing application/json
+
 app.use(express.json());
 
   
-// For parsing application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
-
-
-// app.use(require('serve-static')(__dirname + '/../../public'));
 app.use(require('cookie-parser')());
 app.use(require('body-parser').urlencoded({ extended: true }));
 app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
@@ -39,8 +34,9 @@ passportLogin(passport);
 const saveUser = async (userName, passWord, firstName, lastName) => {
 
     User.findOne({ username: userName}, async (err, doc) => {
-        if(err) throw err;
-        if(doc) console.log("User already exist") // res.send('User already exist')
+      try {
+        if(err) throw new Error('une erreur est survenu');
+        if(doc) throw new Error('User already exist.'); 
         if(!doc) {
             const hashpwd = await bcrypt.hash(passWord, 10);
                 await User.create({
@@ -53,6 +49,12 @@ const saveUser = async (userName, passWord, firstName, lastName) => {
                 
         
         }
+        
+      } catch (error) {
+        return error;
+        
+      }
+
      })
 
    
@@ -79,8 +81,8 @@ const savePB = async (titlex, statutx, dealinex, boardSizex, authorx, pixelModif
 
 app.post("/login", (req, res, next) => {
     passport.authenticate("local", (err, user, info) => {
-      if (err) return res.status(400).json({ 'message': 'Username and password didn t match.' });
-      if (!user)  return res.status(400).json({ 'message': 'Username not exist.' });
+      if (err) return res.status(403).json({ 'message': 'Username and password didn t match.' });
+      if (!user)  return res.status(404).json({ 'message': 'Username not exist.' });
       else {
         req.logIn(user, (err) => {
           if (err) throw err;
@@ -91,14 +93,32 @@ app.post("/login", (req, res, next) => {
     })(req, res, next);
   });
 
-app.post("/creaseUser", (req, res) => {
+app.post("/creaseUser",  (req, res) => {
      const userName = req.body.userName;
      const password = req.body.password;
      const firstName = req.body.firstName;
      const lastName = req.body.lastName;
      if(!userName || !password) return res.status(400).json({ 'message': 'Username and password are required.' });
+ 
 
-     saveUser(userName, password,firstName, lastName);
+    
+    User.findOne({ username: userName}, async (err, doc) => {
+        if(err) return res.status(700).json({ 'message': 'An error has occured.' })
+        if(doc) return res.status(600).json({ 'message': 'User already exist.' })  
+        if(!doc) {
+            const hashpwd = await bcrypt.hash(password, 10);
+                await User.create({
+                username: userName,
+                password: hashpwd,
+                firstname: firstName? firstName : null,
+                lastname: lastName? lastName : null
+        
+            });
+            res.send("Successfully created");
+  
+      } 
+
+    })
 
     
      

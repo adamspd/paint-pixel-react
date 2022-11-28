@@ -1,0 +1,59 @@
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  body {
+    background-image: none;
+  }
+
+.loginForm {
+        
+      top: 0;
+     /* left: 95%;
+     z-index: 5; 
+     position: absolute;
+     min-height: 100%;
+     padding: 60px calc(10% + 60px) 60px 60px;*/
+      background: #4285F4;
+      
+      
+      transition: 0.3s ease;
+      cursor: pointer;
+}
+
+  
+  
+.loginForm .hearder {
+   margin: 0 0 40px;
+ }
+ .loginForm h1 {
+   padding: 4px 0;
+   color: #4285F4;
+   font-size: 24px;
+   font-weight: 700;
+   text-transform: uppercase;
+   position: relative;
+   z-index: 40;
+   color: #FFFFFF;
+ }
+
+
+offscreen {
+ position: absolute;
+ left: -9999px;
+}
+
+errmsg {
+ background-color: lightpink;
+ color: firebrick;
+ font-weight: bold;
+ padding: 0.5rem;
+ margin-bottom: 0.5rem;
+}
+line {
+ display: inline-block;
+}
