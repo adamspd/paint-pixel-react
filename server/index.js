@@ -6,7 +6,8 @@ const cors = require('cors');
 const User = require('./data/users');
 const PixelBoard = require('./data/PixelBoards');
 const passport = require('passport');
-const passportLogin = require('./passport')
+const passportJWT = require('./passportJWT');
+const { issueJWT, isPasswordValid } = require('./utils');
 
 
 const bcrypt = require("bcryptjs");
@@ -24,12 +25,14 @@ app.use(express.json());
 
   
 app.use(express.urlencoded({ extended: true }));
-app.use(require('cookie-parser')());
-app.use(require('body-parser').urlencoded({ extended: true }));
-app.use(require('express-session')({ secret: 'keyboard cat', resave: true, saveUninitialized: true }));
+// app.use(require('cookie-parser')());
+// app.use(require('body-parser').urlencoded({ extended: true }));
+// app.use(require('express-session')({ secret: 'secret', resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
-app.use(passport.session());
-passportLogin(passport);
+// app.use(passport.session());
+
+
+passportJWT(passport);
 
 const saveUser = async (userName, passWord, firstName, lastName) => {
 
@@ -62,9 +65,6 @@ const saveUser = async (userName, passWord, firstName, lastName) => {
     
 };
 const savePB = async (titlex, statutx, dealinex, boardSizex, authorx, pixelModificationx, timeLimitx) => {
-
-
-
     
     await PixelBoard.create({     
         title: titlex? titlex : null,
@@ -79,20 +79,44 @@ const savePB = async (titlex, statutx, dealinex, boardSizex, authorx, pixelModif
     
 };
 
-app.post("/login", (req, res, next) => {
-    passport.authenticate("local", (err, user, info) => {
-      if (err) return res.status(403).json({ 'message': 'Username and password didn t match.' });
-      if (!user)  return res.status(404).json({ 'message': 'Username not exist.' });
-      else {
-        req.logIn(user, (err) => {
-          if (err) throw err;
-          res.send("Successfully Authenticated");
-          console.log(req.user);
-        });
-      }
-    })(req, res, next);
-  });
 
+app.post("/homepage", passport.authenticate('jwt', {session: false}),(req, res, next) => {
+  res.status(200).json({ success: true, msg: "You are connected"})
+});
+  
+app.post("/login", (req, res, next) => {
+  try{
+    User.findOne({ username: req.body.username }, function (err, user) {
+      if (err) return res.status(403).json({ 'message': 'Username and password didn t match.' });
+      if (!user) return res.status(401).json({ 'message': 'Username not exist.' });
+  
+      bcrypt.compare(req.body.password, user.password, (err, result) => {
+          if (err) throw err;
+          console.log("le resultat est : " + result);
+          console.log( result === true)
+          const isValidPwd = result === true
+          if (isValidPwd) {
+            const tokenObject = issueJWT(user);
+            res.status(200).json({ success: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expires})
+          }
+          else{
+            console.log(req.body.password);
+            console.log(user.password);
+             res.status(401).json({ 'message': 'Wrong Credentials.' });
+          }
+      });
+  
+  
+      
+  
+      
+    });
+
+  }catch(err){
+    res.status(600).json({ 'message': 'there is a problem with the token.' });
+  }
+  
+});
 app.post("/creaseUser",  (req, res) => {
      const userName = req.body.userName;
      const password = req.body.password;
@@ -107,15 +131,19 @@ app.post("/creaseUser",  (req, res) => {
         if(doc) return res.status(600).json({ 'message': 'User already exist.' })  
         if(!doc) {
             const hashpwd = await bcrypt.hash(password, 10);
-                await User.create({
+
+                const newUser = await User.create({
                 username: userName,
                 password: hashpwd,
                 firstname: firstName? firstName : null,
                 lastname: lastName? lastName : null
         
             });
-            res.send("Successfully created");
-  
+
+            const jwt = issueJWT(newUser);
+
+            res.json({ success: true, user: newUser, token: jwt.token, expiresIn: jwt.expires})
+    
       } 
 
     })

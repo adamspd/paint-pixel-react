@@ -52,7 +52,7 @@ function Signup() {
         }
       );
       setSuccess(true);
-      // console.log(response.data);
+      console.log(response.data);
       // console.log(response.data());
 
 
