@@ -1,13 +1,17 @@
 import React, { useState } from 'react'
 import { useRef, useEffect } from 'react'
 import axios from '../axios'
-import { Link } from 'react-router-dom';
+import { Link, UNSAFE_DataRouterStateContext } from 'react-router-dom';
 import '../css/login.css'
+import { saveJwt, logout, isAuthenticate, getJwt } from '../utils';
+import { useNavigate } from 'react-router-dom';
 // import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 const LOGIN_URL = '/login'
 function Login() {
+  let navigate = useNavigate();
+
   const userNameInput = useRef();
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
@@ -41,8 +45,12 @@ function Login() {
         }
       );
 
-
-      setSuccess(true);
+       //console.log(response.data.token);
+       // setSuccess(true);
+      // logout();
+       saveJwt(response.data.token);
+       console.log(getJwt());
+       navigate('/');
 
     }
 
