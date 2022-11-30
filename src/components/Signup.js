@@ -76,7 +76,7 @@ function Signup() {
       {success ? <section>
 
         <h1>Your account has been created Successfully!</h1>
-        <Link to='/'>Login Here</Link>
+        <Link to='/Login'>Login Here</Link>
       </section> :
 
         <section>

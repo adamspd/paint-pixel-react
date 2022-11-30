@@ -1,9 +1,15 @@
 import React from 'react'
+// import ThemeProvider from '../Theme'
 
-function homepage() {
+function Homepage() {
+
   return (
-    <div>homepage</div>
+
+      <section>
+        <div>homepage</div>
+      </section>
+
   )
 }
 
-export default homepage
+export default Homepage

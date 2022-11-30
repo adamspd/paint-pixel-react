@@ -92,8 +92,6 @@ app.post("/login", (req, res, next) => {
   
       bcrypt.compare(req.body.password, user.password, (err, result) => {
           if (err) throw err;
-          console.log("le resultat est : " + result);
-          console.log( result === true)
           const isValidPwd = result === true
           if (isValidPwd) {
             const tokenObject = issueJWT(user);
