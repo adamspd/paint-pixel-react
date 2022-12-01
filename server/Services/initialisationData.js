@@ -1,5 +1,5 @@
-const User = require('./data/users');
-const PixelBoard = require('./data/PixelBoards');
+const User = require('../data/users');
+const PixelBoard = require('../data/PixelBoards');
 
 const createUsers = async () => {
     

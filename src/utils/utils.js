@@ -7,6 +7,8 @@ const logout = () => {
 }
 
 const isAuthenticate = () => {
+    console.log("IsAuthenticate called");
+    console.log("jwt :" + localStorage.getItem('jwt'));
     if (localStorage.getItem('jwt')) return true 
     else return false
 }

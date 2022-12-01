@@ -1,10 +1,10 @@
 import React from 'react'
 import { useRef, useState, useEffect } from 'react'
-import axios from '../axios'
+import axios from '../utils/axios'
 
 
 
-const CREATE_PIXELBOARD_URL = '/creasePB'
+const CREATE_PIXELBOARD_URL = '/pixelboard/create'
 
 function FormCreatePB() {
 

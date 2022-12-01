@@ -9,7 +9,7 @@ import './css/App.css'
 import PixelBoardCreate from './components/FormCreatePB'
 import RouterProtecter from './RouterProtecter';
 import {useContext} from 'react';
-import {Theme} from './Theme';
+import {Theme} from './utils/Theme';
 
 function App() {
   const {theme} = useContext(Theme);
@@ -23,13 +23,13 @@ function App() {
       <Route element={<RouterProtecter />}>
         <Route path='/' element={<HomePage/>}/>
         <Route path='/PixelBoardCreate' element={<PixelBoardCreate/>}/>
+      </Route>
 
-       </Route>
+
 
         <Route path='/Login' element={<Login/>}/>
         <Route path='/SignUp' element={<SignUp/>}/>
-        <Route path='/Admin' element={<Admin/>}/>
-        
+        <Route path='/Admin' element={<Admin/>}/>        
     </Routes>
     </section>
     </section>

@@ -1,12 +1,13 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { isAuthenticate } from "./utils";
-import Login from './components/Login'
+import Login from "./components/Login";
+import { isAuthenticate } from "./utils/utils";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 const RouterProtecter = () => {
-   if(!isAuthenticate()){
-    return <Navigate to="/login"/>
-   }
+  // const {children} = props
+   // if(!isAuthenticate()){
+   //  return <Navigate to="/Login"/>
+   // }
    return isAuthenticate() ? <Outlet/> : <Login/>
 
 
