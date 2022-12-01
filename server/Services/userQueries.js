@@ -1,5 +1,12 @@
-const User = require('./data/users');
+const User =  require('../data/users');
 const jsonwebtoken = require('jsonwebtoken');
+
+
+
+const listUsers = () => {
+    User.find();
+}
+
 
 const retrieveUser = async(req,res) => {
     try{
@@ -25,4 +32,5 @@ const retrieveUser = async(req,res) => {
         console.log("retrieveUser :" + err)
     }
 }
-module.exports = retrieveUser
+
+module.exports = { listUsers, retrieveUser}

@@ -4,7 +4,7 @@ import axios from './axios'
 import { getJwt, getTheme , switchTheme } from './utils'
 
 
-const URL_UPDATE_THEME = '/updateTheme'
+const URL_UPDATE_THEME = '/theme/update'
 
 const ThemeProvider = (props) =>  {
     const [theme, setTheme] = useState('');

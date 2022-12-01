@@ -1,7 +1,7 @@
 import React from 'react'
 import '../css/template.css'
 import {useContext} from 'react';
-import {Theme} from '../Theme';
+import {Theme} from '../utils/Theme';
 
 
 function Template() {

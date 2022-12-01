@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useRef, useEffect } from 'react'
-import axios from '../axios'
+import axios from '../utils/axios'
 import { Link, UNSAFE_DataRouterStateContext } from 'react-router-dom';
 import '../css/login.css'
-import { saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme } from '../utils';
+import { saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme } from '../utils/utils';
 import { useNavigate } from 'react-router-dom';
-import {Theme} from '../Theme';
+import {Theme} from '../utils/Theme';
 import {useContext} from 'react';
 
 
@@ -55,14 +55,14 @@ function Login() {
        console.log('ici le theme reçu : '+ response.data.user.theme);
        console.log('ici le theme initialisé : '+ getTheme());
        InitTheme(response.data.user.theme);
-       navigate("/",{ state: {
-
-                          username: response.data.user.username
-       }
+       navigate('/');
+    //    navigate("/",{ state: {
+    //                         username: response.data.user.username
+    //    }
                             
 
-    })}
-
+    // })}
+      }
     catch (error) {
       setErrMsg('No Server Response' + error);
       if (!error?.response) {
