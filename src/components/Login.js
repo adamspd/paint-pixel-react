@@ -3,13 +3,16 @@ import { useRef, useEffect } from 'react'
 import axios from '../axios'
 import { Link, UNSAFE_DataRouterStateContext } from 'react-router-dom';
 import '../css/login.css'
-import { saveJwt, logout, isAuthenticate, getJwt } from '../utils';
+import { saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme } from '../utils';
 import { useNavigate } from 'react-router-dom';
-// import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons"
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {Theme} from '../Theme';
+import {useContext} from 'react';
+
 
 const LOGIN_URL = '/login'
 function Login() {
+
+  const {theme, ChangeTheme, InitTheme} = useContext(Theme);
   let navigate = useNavigate();
 
   const userNameInput = useRef();
@@ -17,12 +20,11 @@ function Login() {
   const [password, setPassword] = useState('');
   const [success, setSuccess] = useState(false);
   const [errMsg, setErrMsg] = useState("");
-
+  
 
 
   useEffect(() => {
     userNameInput.current.focus();
-    // setErrMsg('')
   }, []);
 
 
@@ -45,14 +47,21 @@ function Login() {
         }
       );
 
-       //console.log(response.data.token);
-       // setSuccess(true);
-      // logout();
+       logout();
        saveJwt(response.data.token);
-       console.log(getJwt());
-       navigate('/');
+       saveTheme(response.data.user.theme);
+       console.log(getTheme());
 
-    }
+       console.log('ici le theme reçu : '+ response.data.user.theme);
+       console.log('ici le theme initialisé : '+ getTheme());
+       InitTheme(response.data.user.theme);
+       navigate("/",{ state: {
+
+                          username: response.data.user.username
+       }
+                            
+
+    })}
 
     catch (error) {
       setErrMsg('No Server Response' + error);

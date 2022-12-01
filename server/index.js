@@ -1,5 +1,5 @@
 const express = require('express');
-const { default: mongoose } = require('mongoose');
+const { default: mongoose, Mongoose } = require('mongoose');
 const connectDB = require('./mongorequest');
 const {createUsers, createPixelBoards} = require('./init');
 const cors = require('cors');
@@ -8,9 +8,11 @@ const PixelBoard = require('./data/PixelBoards');
 const passport = require('passport');
 const passportJWT = require('./passportJWT');
 const { issueJWT, isPasswordValid } = require('./utils');
+const jsonwebtoken = require('jsonwebtoken');
 
 
 const bcrypt = require("bcryptjs");
+
 
 
 const app = express();
@@ -25,11 +27,9 @@ app.use(express.json());
 
   
 app.use(express.urlencoded({ extended: true }));
-// app.use(require('cookie-parser')());
-// app.use(require('body-parser').urlencoded({ extended: true }));
-// app.use(require('express-session')({ secret: 'secret', resave: false, saveUninitialized: true }));
+
 app.use(passport.initialize());
-// app.use(passport.session());
+
 
 
 passportJWT(passport);
@@ -82,6 +82,51 @@ const savePB = async (titlex, statutx, dealinex, boardSizex, authorx, pixelModif
 
 app.post("/homepage", passport.authenticate('jwt', {session: false}),(req, res, next) => {
   res.status(200).json({ success: true, msg: "You are connected"})
+});
+
+
+app.post("/updateTheme", passport.authenticate('jwt', {session: false}) ,async (req, res, next) => {
+  console.log(req.headers.authorization);
+  console.log(req.body.theme);
+  const authorization = req.headers.authorization.split(' ')[1];
+  const JwtDecoded = jsonwebtoken.verify(authorization, "secrets");
+  console.log(JwtDecoded.sub);
+  const userId = JwtDecoded.sub
+  try{
+    await User.findOneAndUpdate({"_id": mongoose.Types.ObjectId(userId)}, {"theme": req.body.theme});
+    res.status(200).json({success: true, reponse : req.body.theme, id : mongoose.Types.ObjectId(userId)});
+  } catch(err){
+    console.log("update: "+ err);
+  }
+
+});
+
+
+app.get("/GetTheme", passport.authenticate('jwt', {session: false}),(req, res, next) => {
+const authorization = req.headers.authorization.split(' ')[1];
+const JwtDecoded = jsonwebtoken.verify(authorization, "secrets");
+console.log(JwtDecoded.sub);
+const userId = JwtDecoded.sub;
+try{
+  User.findById(mongoose.Types.ObjectId(userId), function (err, docs) {
+      if (err){
+        res.status(401).json({success: false, msg: 'Unauthorized'});
+      }
+      else{
+        console.log(mongoose.Types.ObjectId(userId));
+          console.log("Result : ", docs);
+          console.log(docs.theme);
+          const th = docs.theme;
+          res.status(200).json({success: true, theme : th});
+      }
+    })
+  
+      
+}
+catch(err){
+  res.status(500).json({success: false, msg: 'Server does not respond'});
+}
+
 });
   
 app.post("/login", (req, res, next) => {
@@ -175,5 +220,3 @@ mongoose.connection.once('open', () => {
     });
 
 })
-
-

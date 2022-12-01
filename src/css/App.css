@@ -1,12 +1,14 @@
-.componentx{
-    display: flex;
-    justify-content: center;
-    margin-left: 10%;
-    margin-top: 10%;
-    width: 80%;
-    height: 50vh;
+.app.light{
+    color: #333;
+    background-color: whitesmoke;
+    width: 100vw;
+    height: 100vh;
+
 }
 
-.darkmode{
-    
+.app.dark{
+    color: whitesmoke;
+    background-color: #333;
+    width: 100vw;
+    height: 100vh;
 }
