@@ -1,12 +1,30 @@
 import React from 'react'
-// import ThemeProvider from '../Theme'
+import { useLocation, useNavigate } from "react-router-dom"; 
+import {useContext} from 'react';
+import {Theme} from '../Theme';
 
-function Homepage() {
+
+
+import { logout } from '../utils';
+
+function Homepage(props) {
+  let navigate = useNavigate();
+  const {theme, ChangeTheme} = useContext(Theme);
+  const location = useLocation();
+  const handeLogout = () =>{
+    logout();
+    navigate('/Login');
+};
+const handeTheme = () =>{
+  ChangeTheme();
+};
 
   return (
 
       <section>
-        <div>homepage</div>
+        <div>Welcome {location.state.username}</div>
+        <button onClick={handeLogout}>Logout</button>
+        <button onClick={handeTheme}>Change Theme</button>
       </section>
 
   )

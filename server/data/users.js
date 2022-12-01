@@ -14,7 +14,10 @@ const userSchema = new Schema({
 
     firstname: String,
 
-    lastname: String
+    lastname: String,
+    theme: {
+        type: String, default: 'light'
+    }
 
 
 });

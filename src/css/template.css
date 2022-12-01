@@ -3,7 +3,7 @@ body{
     margin: 0;
 }
 
-.templateNav{
+.template.light nav{
     background-color: #333;
     color: white;
     display: flex;
@@ -12,4 +12,17 @@ body{
     gap: 2rem;
     padding: 0 1rem;
     
+}
+.template.dark nav{
+    background-color: whitesmoke;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 2rem;
+    padding: 0 1rem;
+    
+}
+h1{
+   font-size: 1.5rem;
 }
