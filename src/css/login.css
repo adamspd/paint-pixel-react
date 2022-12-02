@@ -1,59 +1,103 @@
+body {
+    background-image: none;
+}
+
+.loginForm {
+    background: #4285F4;
+    transition: 0.3s ease;
+    border-radius: 20px;
+    max-width: 350px;
+    margin: 20px auto;
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 0 10px 0 rgba(159, 159, 159, 0.2);
+    /* box always in the middle of the screen */
+    transform: translate(0, 45%);
+}
+
+
+.headerTitle {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.loginForm h1 {
+    padding: 4px 0;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    z-index: 40;
+    color: #FFFFFF;
+}
+
+label {
+    color: #FFFFFF;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    margin: 10px auto 5px;
+}
+
+input {
+    width: 90%;
+    padding: 10px 15px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background: transparent;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    outline: none;
+}
+
+.loginButton {
+    width: 100%;
+    padding: 10px 15px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background: #fff;
+    color: #4285F4;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.loginButton:hover {
+    background: #011534;
+    color: #fff;
+    border: 1px solid #011534;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.loginButton:active {
+    background: #011534;
+    color: #fff;
+    border: 1px solid #011534;
+}
+
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
 .errmsg {
     background-color: lightpink;
     color: firebrick;
     font-weight: bold;
     padding: 0.5rem;
     margin-bottom: 0.5rem;
-  }
-
-  body {
-    background-image: none;
-  }
-
-.loginForm {
-        
-      top: 0;
-     /* left: 95%;
-     z-index: 5; 
-     position: absolute;
-     min-height: 100%;
-     padding: 60px calc(10% + 60px) 60px 60px;*/
-      background: #4285F4;
-      
-      
-      transition: 0.3s ease;
-      cursor: pointer;
 }
 
-  
-  
-.loginForm .hearder {
-   margin: 0 0 40px;
- }
- .loginForm h1 {
-   padding: 4px 0;
-   color: #4285F4;
-   font-size: 24px;
-   font-weight: 700;
-   text-transform: uppercase;
-   position: relative;
-   z-index: 40;
-   color: #FFFFFF;
- }
-
-
-offscreen {
- position: absolute;
- left: -9999px;
-}
-
-errmsg {
- background-color: lightpink;
- color: firebrick;
- font-weight: bold;
- padding: 0.5rem;
- margin-bottom: 0.5rem;
-}
 line {
- display: inline-block;
+    display: inline-block;
 }
