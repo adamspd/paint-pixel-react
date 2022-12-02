@@ -8,7 +8,7 @@
     position: relative;
     box-shadow: 0 0 10px 0 rgba(159, 159, 159, 0.2);
     /* box always in the middle of the screen */
-    transform: translate(0, 30%);
+    transform: translate(0, 15%);
 }
 
 .title {
@@ -61,4 +61,24 @@ input {
     border: 1px solid #02255e;
     transition: 0.3s ease;
     font-size: 15px;
+}
+
+.successMessage {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    margin: 10px auto 5px;
+    text-align: center;
+}
+
+.linkLogin a {
+    color: rgba(96, 152, 197, 0.92);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    display: block;
+    margin: 10px auto 5px;
+    text-align: center;
 }

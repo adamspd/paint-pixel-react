@@ -65,11 +65,13 @@ function Signup() {
     }
 
     return (<>
-        {success ? <section>
+        {success ? <section className='successMessage'>
                 <h4>
-                    Your account has been created Successfully!&nbsp;
-                    <Link to='/Login'>Login Here</Link>
+                    Your account has been created successfully!&nbsp;
                 </h4>
+                <div className='linkLogin'>
+                    <Link to='/Login'>Login Here</Link>
+                </div>
             </section> :
 
             <section className='registerForm'>

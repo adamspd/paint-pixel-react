@@ -1,33 +1,28 @@
 import React from 'react'
-import { useNavigate } from "react-router-dom"; 
+import {useNavigate} from "react-router-dom";
 import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
-
-
-
-import { logout } from '../utils/utils';
+import {logout} from '../utils/utils';
 
 function Homepage(props) {
-  let navigate = useNavigate();
-  const {theme, ChangeTheme} = useContext(Theme);
-  
-  const handeLogout = () =>{
-    logout();
-    navigate('/Login');
-};
-const handeTheme = () =>{
-  ChangeTheme();
-};
+    let navigate = useNavigate();
+    const {theme, ChangeTheme} = useContext(Theme);
 
-  return (
+    const handeLogout = () => {
+        logout();
+        navigate('/Login');
+    };
+    const handeTheme = () => {
+        ChangeTheme();
+    };
 
-      <section>
-        <div>Welcome</div>
-        <button onClick={handeLogout}>Logout</button>
-        <button onClick={handeTheme}>Change Theme</button>
-      </section>
-
-  )
+    return (
+        <section>
+            <div>Welcome</div>
+            <button onClick={handeLogout}>Logout</button>
+            <button onClick={handeTheme}>Change Theme</button>
+        </section>
+    )
 }
 
 export default Homepage
