@@ -1,0 +1,46 @@
+.container{
+    display: flex;
+    justify-content: space-around;
+}
+
+.container-pb{
+    border: 5px solid red;
+    cursor: pointer;
+    background-color: aq;
+}
+.colorChoice{
+    border: 1px solid red;
+    
+
+}
+.colorChoices{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+.colorChoice{
+    width: 30Px;
+    height: 30px;
+}
+.colorChoice.green {
+    background-color: green;
+}
+.colorChoice.red {
+    background-color: red;
+}
+.colorChoice.gray {
+    background-color: gray;
+}
+.colorChoice.blue {
+    background-color: blue;
+}
+.colorChoice.pink {
+    background-color: pink;
+}
+.colorChoice.yellow {
+    background-color: yellow;
+}
+.colorChoice.aqua {
+    background-color: aqua;
+}
