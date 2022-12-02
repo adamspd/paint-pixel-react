@@ -8,6 +8,7 @@ const listUsers = () => {
 }
 
 
+
 const retrieveUser = async(req,res) => {
     try{
         

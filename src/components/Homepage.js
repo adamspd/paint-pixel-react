@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from "react-router-dom"; 
 import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
+import PixelBoard from './PixelBoard';
 
 
 
@@ -25,6 +26,9 @@ const handeTheme = () =>{
         <div>Welcome</div>
         <button onClick={handeLogout}>Logout</button>
         <button onClick={handeTheme}>Change Theme</button>
+
+        <PixelBoard/>
+        
       </section>
 
   )
