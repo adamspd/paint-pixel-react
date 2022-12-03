@@ -6,15 +6,16 @@ import {Theme} from '../utils/Theme';
 import {logout} from '../utils/utils';
 import {Link} from 'react-router-dom';
 import '../css/sidebar.css';
-import {FaTh, FaBars, FaUserAlt, FaThList} from 'react-icons/fa';
+import {FaHome, FaBars, FaUserAlt, FaEdit, FaUserCog, FaSignOutAlt} from 'react-icons/fa';
 import {NavLink} from 'react-router-dom';
 
 const Sidebar = ({children}) => {
     const[isOpened, setIsOpened] = useState(false);
     const toggle = () => setIsOpened(!isOpened);
     const menuItem = [
-        {name: 'Home', path: '/', icon: <FaTh/>},
-        {name: 'PixelBoardCreate', path: '/PixelBoardCreate', icon: <FaThList/>},
+        {name: 'Home', path: '/', icon: <FaHome/>},
+        {name: 'PixelBoardCreate', path: '/PixelBoardCreate', icon: <FaEdit/>},
+        {name: 'Admin', path: '/Admin', icon: <FaUserCog/>},
     ];
 
     return (
