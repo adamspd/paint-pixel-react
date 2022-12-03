@@ -1,19 +1,15 @@
 import React from 'react'
-import {Outlet, Route, Routes} from 'react-router-dom'
+import {Outlet, Route, Routes, useNavigate} from 'react-router-dom'
 import './css/App.css'
 import RouterProtecter from './RouterProtecter';
 import {useContext} from 'react';
 import {Theme} from './utils/Theme';
+import {logout} from './utils/utils';
 import {Admin, Template, Sidebar, HomePage, SignUp, Login, PixelBoardCreate} from './components'
 
 function App() {
+    const navigate = useNavigate();
     const {theme} = useContext(Theme);
-    const SidebarLayout = () => (
-        <>
-            <Sidebar />
-            <Outlet />
-        </>
-    );
 
     return (
         <>
@@ -23,11 +19,11 @@ function App() {
                     <Routes>
                         <Route element={<RouterProtecter/>}>
                             <Route path='/PixelBoardCreate' element={<PixelBoardCreate/>}/>
+                            <Route path='/Admin' element={<Admin/>}/>
                             <Route path='/' element={<HomePage/>}/>
                         </Route>
                         <Route path='/Login' element={<Login/>}/>
                         <Route path='/SignUp' element={<SignUp/>}/>
-                        <Route path='/Admin' element={<Admin/>}/>
                     </Routes>
                 </section>
             </section>
