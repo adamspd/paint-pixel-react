@@ -1,0 +1,47 @@
+.pixelBoardContainer{
+    display: flex;
+    justify-content: left;
+    flex-wrap: wrap;
+    flex-direction: row;
+    gap: 10px;
+    margin-top: 5px;
+}
+
+.container-pb{
+    border: 1px solid red;
+    cursor: pointer;
+}
+.colorChoice{
+    border: 1px solid black;
+}
+.colorChoices{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+}
+.colorChoice{
+    width: 30Px;
+    height: 30px;
+}
+.colorChoice.green {
+    background-color: green;
+}
+.colorChoice.red {
+    background-color: red;
+}
+.colorChoice.gray {
+    background-color: gray;
+}
+.colorChoice.blue {
+    background-color: blue;
+}
+.colorChoice.pink {
+    background-color: pink;
+}
+.colorChoice.yellow {
+    background-color: yellow;
+}
+.colorChoice.aqua {
+    background-color: aqua;
+}
