@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
 import {logout} from '../utils/utils';
+import {Sidebar} from './index'
+import '../css/homepage.css'
 
 function Homepage(props) {
     let navigate = useNavigate();
@@ -17,11 +19,12 @@ function Homepage(props) {
     };
 
     return (
-        <section>
-            <div>Welcome</div>
-            <button onClick={handeLogout}>Logout</button>
-            <button onClick={handeTheme}>Change Theme</button>
-        </section>
+        <Sidebar>
+            <section>
+                <button onClick={handeLogout}>Logout</button>
+                <button onClick={handeTheme}>Change Theme</button>
+            </section>
+        </Sidebar>
     )
 }
 
