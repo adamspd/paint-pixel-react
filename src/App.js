@@ -1,40 +1,38 @@
 import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import HomePage from './components/Homepage'
-import Login from './components/Login'
-import SignUp from './components/Signup'
-import Admin from './components/Admin'
-import Template from './components/Template'
+import {Outlet, Route, Routes} from 'react-router-dom'
 import './css/App.css'
-import PixelBoardCreate from './components/FormCreatePB'
 import RouterProtecter from './RouterProtecter';
 import {useContext} from 'react';
 import {Theme} from './utils/Theme';
+import {Admin, Template, Sidebar, HomePage, SignUp, Login, PixelBoardCreate} from './components'
 
 function App() {
-  const {theme} = useContext(Theme);
-  return (
-    <>
-    <section className={theme === 'light' ? 'app light' : 'app dark'}>
-    <Template />
-    <section className={theme === 'dark' ? 'componentx': 'darkmode'}>
-    <Routes>
+    const {theme} = useContext(Theme);
+    const SidebarLayout = () => (
+        <>
+            <Sidebar />
+            <Outlet />
+        </>
+    );
 
-      <Route element={<RouterProtecter />}>
-        <Route path='/' element={<HomePage/>}/>
-        <Route path='/PixelBoardCreate' element={<PixelBoardCreate/>}/>
-      </Route>
-
-
-
-        <Route path='/Login' element={<Login/>}/>
-        <Route path='/SignUp' element={<SignUp/>}/>
-        <Route path='/Admin' element={<Admin/>}/>        
-    </Routes>
-    </section>
-    </section>
-    </>
-  )
+    return (
+        <>
+            <section className={theme === 'light' ? 'app light' : 'app dark'}>
+                <section className={theme === 'dark' ? 'componentx' : 'darkmode'}>
+                    <Template/>
+                    <Routes>
+                        <Route element={<RouterProtecter/>}>
+                            <Route path='/PixelBoardCreate' element={<PixelBoardCreate/>}/>
+                            <Route path='/' element={<HomePage/>}/>
+                        </Route>
+                        <Route path='/Login' element={<Login/>}/>
+                        <Route path='/SignUp' element={<SignUp/>}/>
+                        <Route path='/Admin' element={<Admin/>}/>
+                    </Routes>
+                </section>
+            </section>
+        </>
+    )
 }
 
 export default App
