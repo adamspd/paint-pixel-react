@@ -2,6 +2,7 @@ import React from 'react'
 import {useNavigate} from "react-router-dom";
 import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
+import PixelBoard from './PixelBoard';
 import {logout} from '../utils/utils';
 import {Sidebar} from './index'
 import '../css/homepage.css'
@@ -19,12 +20,15 @@ function Homepage(props) {
     };
 
     return (
-        <Sidebar>
-            <section>
-                <button onClick={handeLogout}>Logout</button>
-                <button onClick={handeTheme}>Change Theme</button>
-            </section>
-        </Sidebar>
+        <div className="homepage">
+            <Sidebar>
+                <section>
+                    <button onClick={handeLogout}>Logout</button>
+                    <button onClick={handeTheme}>Change Theme</button>
+                    <PixelBoard/>
+                </section>
+            </Sidebar>
+        </div>
     )
 }
 

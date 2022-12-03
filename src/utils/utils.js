@@ -1,33 +1,36 @@
+// localStorage
+
 const saveJwt = (jwt) => {
-    localStorage.setItem('jwt', jwt)
+    sessionStorage.setItem('jwt', jwt)
+        
 }
 
 const logout = () => {
-    localStorage.clear();
+    sessionStorage.clear();
 }
 
 const isAuthenticate = () => {
     console.log("IsAuthenticate called");
-    console.log("jwt :" + localStorage.getItem('jwt'));
-    if (localStorage.getItem('jwt')) return true 
+    console.log("jwt :" + sessionStorage.getItem('jwt'));
+    if (sessionStorage.getItem('jwt')) return true 
     else return false
 }
 
 const getJwt = () => {
-    return localStorage.getItem('jwt')
+    return sessionStorage.getItem('jwt')
 }
 
 const saveTheme = (theme) => {
-    localStorage.setItem('theme', theme)
+    sessionStorage.setItem('theme', theme)
 }
 
 const getTheme = () => {
-    return localStorage.getItem('theme');
+    return sessionStorage.getItem('theme');
 }
 
 const switchTheme = async (themee) => {
    const theme  = themee === 'light' ? 'dark' : 'light';
-    localStorage.setItem('theme', theme);
+    sessionStorage.setItem('theme', theme);
     return theme;
 
 
