@@ -1,81 +1,128 @@
-import { warning } from '@remix-run/router';
+/**
+ * @type HTMLCanvasElement
+ */
+
+
 import React, { useEffect, useState, useRef } from 'react'
 import '../css/pixelboard.css'
 
 function PixelBoard() {
-    const canvasRef = useRef(null);
-    const [color, setColor] = useState(null); 
-    const [ warning, setWarning] = useState(null);
-    // const [x, setX] = useState(null); 
-    // const [y, setY] = useState(null); 
-    // const [height, setHeight] = useState(null); 
-    // const [width, setWidth] = useState(null);
-    
-    // useEffect(()=> {
 
-    // }, [x,y])
+  const WIDTH = 500;
+  const HEIGHT = 500;
+
+
+  const PIXEL_WIDTH = WIDTH / 10;
+  const PIXEL_HEIGHT = HEIGHT / 10;
+  const colorTab = ['red', 'blue', 'green', 'gray', 'yellow', 'pink', 'aqua'];
+  const canvasRef = useRef(null);
+
+  const [color, setColor] = useState(null); 
+  const [ warning, setWarning] = useState(null);
+
+  const [hoverColor, setHoverColor] = useState('aqua');
+  const [pos, setPos] = useState(null);
+
+
+  let pixels = new Map();
+
 
     useEffect(() => {
 
-         canvasRef.current.width = 500;
-         canvasRef.current.height = 500;
+         canvasRef.current.width = WIDTH;
+         canvasRef.current.height = HEIGHT;
+         const context = canvasRef.current.getContext("2d");
+         context.fillStyle = "white";
+         context.fillRect(0,0, WIDTH, HEIGHT);
          setWarning(null);
          
-         
-         // paintPixel(100, 100, '#333');
 
     },[]);
 
     useEffect(() => {
       setWarning(null);
 
- },[color]);
+ },[]);
+
 
     const paintPixel = (x, y, color) => {
+        const pixelX = x * PIXEL_WIDTH;
+        const pixelY = y * PIXEL_HEIGHT;
+
         const context = canvasRef.current.getContext("2d");
         context.fillStyle = color;
-        context.fillRect(x,y, 50, 50);
+        context.fillRect(pixelX,pixelY, PIXEL_WIDTH, PIXEL_HEIGHT);
 
     };
-    // const getMousePos = ()=> {
-    //     const position = canvasRef.current.MouseGetPos();
-    //     const mousePositionX = position[0];
-    //     const mousePositionY = position[1];
-    //     const rect = canvasRef.current.getBoundingClientRect();
 
-    // };
+
     function getMousePos(canvas, evt) {
       var rect = canvas.getBoundingClientRect();
-      return {
-        x: evt.clientX - rect.left,
-        y: evt.clientY - rect.top
-      };
+      const x = evt.clientX - rect.left
+      const y = evt.clientY - rect.top
+      const pixelX = Math.floor(x / PIXEL_WIDTH)
+      const pixelY = Math.floor(y / PIXEL_HEIGHT)
+      console.log(pixelX,pixelY);
+      return { pixelX, pixelY}
+
+
     }
 
     const draw = (e) => {
-        const {x, y} = getMousePos(canvasRef.current, e);
+        const {pixelX, pixelY} = getMousePos(canvasRef.current, e);
         console.log(getMousePos(canvasRef.current, e));
-        console.log(x);
-        console.log(y);
         if(!color) return setWarning("You need to color to fill with! (By clicking on it)");
-        paintPixel(x, y, color);
+
+        paintPixel(pixelX, pixelY, color);
+        pixels.set(`pixel_${pixelX}_${pixelY}`, {color : color});
+        console.log("draw pixels added (xycolor) : " + pixelX, pixelY, color);
+        console.log("draw has : " + pixels.has(`pixel_${pixelX}_${pixelY}`));
+        console.log("draw has : " + pixels.get(`pixel_${pixelX}_${pixelY}`).color);
+        console.log("draw keys : " + pixels);
+        pixels.forEach((value, key, innerMap) => {
+
+        })
 
     };
-
     const show = (e) => {
-      const {x, y} = getMousePos(canvasRef.current, e)
-      console.log(getMousePos(canvasRef.current, e))
-      const context = canvasRef.current.getContext("2d");
-      context.fillStyle = "gray";
-      context.fillRect(x,y, 50, 50);
 
-    };
+      const {pixelX: currentX, pixelY: currentY} = getMousePos(canvasRef.current, e); 
+
+      if (pos && !pixels.has(`pixel_${pos.x}_${pos.y}`)) hide2(pos.x, pos.y);
+
+      if(pixels.has(`pixel_${currentX}_${currentY}`)){
+        console.log("current pixel"+currentX+' '+currentY+ " issssss save");
+        return;
+
+        
+      }else if (!pixels.has(`pixel_${currentX}_${currentY}`)){
+
+        setPos(()=> ({x: currentX, y : currentY}))
+        paintPixel(currentX, currentY, hoverColor);
+
+      } 
+      
+    }
+
+
+
+    const hide2 = (x , y) => {
+      paintPixel(x, y, 'white');
+    }
+
+    const hide = (e) => {
+      hide2(pos.x, pos.y);
+
+    }
+
     const selectColor = (e) =>{
        
       setColor(e.target.className.split(' ')[1]);
       console.log(e.target.className.split(' ')[1]);
 
     }
+
+    
 
      
   return (
@@ -87,34 +134,14 @@ function PixelBoard() {
     <canvas className='container-pb'
      ref={canvasRef} 
      onClick={draw}
-     // onMouseOver ={show}
+     onMouseMove = {show}
+     onMouseLeave = {hide}
      >
       
 
     </canvas>
     <div className='colorChoices'>
-
-    <div className='colorChoice red' onClick={selectColor}>
-        
-        </div>
-        <div className='colorChoice green' onClick={selectColor}>
-          
-        </div>
-        <div className='colorChoice gray' onClick={selectColor}>
-          
-        </div>
-        <div className='colorChoice blue' onClick={selectColor}>
-          
-        </div>
-        <div className='colorChoice pink' onClick={selectColor}>
-          
-        </div>
-        <div className='colorChoice yellow' onClick={selectColor}>
-          
-        </div>
-        <div className='colorChoice aqua' onClick={selectColor}>
-        
-      </div>
+       {colorTab.map((color, index) => (<div key={index} className={'colorChoice '+ color} onClick={selectColor}></div>))}
 
     </div>
     </section>
