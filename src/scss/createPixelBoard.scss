@@ -1,0 +1,64 @@
+.createPixelBoardForm {
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 95%;
+    height: 100%;
+    display: block;
+}
+
+label {
+    display: flex;
+    margin: 10px 0;
+    color: #000;
+}
+
+input {
+    width: 90%;
+    padding: 10px 15px;
+    border: 1px solid #111111;
+    border-radius: 5px;
+    background: transparent;
+    color: #0a0a0a;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    outline: none;
+    display: flex;
+}
+
+.createPixelBoardButton {
+    width: 100px;
+    padding: 10px 15px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+    background: #6b6868;
+    color: #d9dee7;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    outline: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    margin-top: 10px;
+}
+
+.createPixelBoardButton:hover {
+    background: #011534;
+    color: #fff;
+    border: 1px solid #011534;
+    font-size: 15px;
+    transition: 0.3s ease;
+}
+
+.createPixelBoardButton:active {
+    background: #011534;
+    color: #fff;
+    border: 1px solid #011534;
+}
+
+.checkbox {
+    display: flex;
+    margin-left: 0;
+    width: 30px;
+}

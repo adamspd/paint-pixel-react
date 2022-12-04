@@ -1,8 +1,15 @@
 import React from 'react'
+import {Sidebar} from './index'
 
 function admin() {
   return (
-    <div>admin</div>
+      <div className="homepage">
+        <Sidebar>
+          <section>
+            <h1>Admin</h1>
+          </section>
+        </Sidebar>
+      </div>
   )
 }
 
