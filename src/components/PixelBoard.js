@@ -7,8 +7,8 @@
    const WIDTH = 500;
    const HEIGHT = 500;
  
-   const PIXEL_WIDTH = WIDTH / 10;
-   const PIXEL_HEIGHT = HEIGHT / 10;
+   const PIXEL_WIDTH = WIDTH / 100;
+   const PIXEL_HEIGHT = HEIGHT / 100;
    const colorTab = ['red', 'blue', 'green', 'gray', 'yellow', 'pink', 'aqua'];
    const canvasRef = useRef(null);
  
