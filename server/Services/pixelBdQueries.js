@@ -4,11 +4,10 @@ const listPixelBoard = () => {
     PixelBoard.find();
 }
 
-const createPixelBoard = async (title, statut, dealine, boardSize, author, pixelModification, timeLimit) => {
+const createPixelBoard = async (title, dealine, boardSize, author, pixelModification, timeLimit) => {
 
     await PixelBoard.create({
         title,
-        statut,
         dealine,
         boardSize,
         author,

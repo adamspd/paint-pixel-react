@@ -10,8 +10,6 @@ const logout = () => {
 }
 
 const isAuthenticate = () => {
-    console.log("IsAuthenticate called");
-    console.log("jwt :" + sessionStorage.getItem('jwt'));
     if (sessionStorage.getItem('jwt')) return true 
     else return false
 }
@@ -35,5 +33,13 @@ const switchTheme = async (themee) => {
 
 
 }
+const saveUser = (currentUser)=> {
+    const {username} = currentUser
+    console.log('save' + username);
+    sessionStorage.setItem('user', username)
+}
+const getCurrentUser = ()=> {
+     sessionStorage.getItem('user');
+}
 
-module.exports = { saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme ,switchTheme}
+module.exports = { saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme ,switchTheme, saveUser, getCurrentUser}
