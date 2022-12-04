@@ -1,8 +1,8 @@
 const express = require('express');
 let router = express.Router();
 
+const pixelboard = require('../data/PixelBoards');
 const {createPixelBoard } = require('../Services/pixelBdQueries');
-
 
 router.post("/create", async (req, res) => {
     if (!req.body.boardSize || req.body.pixelModification === null || !req.body.timeLimit) {
@@ -19,9 +19,16 @@ router.post("/create", async (req, res) => {
 
     await createPixelBoard(title, dealine, boardSize, author, pixelModification, timeLimit);
     res.status(201).json({ 'message': 'PixelBoard Created !.' });
+});
 
-   
-    
+router.get("/count", async (req, res) => {
+    try{
+        const pb = await pixelboard.find();
+        res.status(200).json({success: true, count: pb.length});
+    } catch(err){
+        console.log(err);
+        res.status(500).json({ 'message': 'Server does not respond' });
+    }
 });
 
 module.exports = router;
