@@ -18,6 +18,7 @@ router.post("/", (req, res, next) => {
             const isValidPwd = result === true
             if (isValidPwd) {
               const tokenObject = issueJWT(user);
+              console.log(user);
               res.status(200).json({ success: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expires})
             }
             else{
