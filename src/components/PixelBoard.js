@@ -18,7 +18,7 @@
    const [hoverColor, setHoverColor] = useState('aqua');
    const [pos, setPos] = useState(null);
  
-   let pixels = new Map();
+   const [pixels, setPixels] = useState(new Map());
  
      useEffect(() => {
  
@@ -64,7 +64,8 @@
          if(!color) return setWarning("You need to color to fill with! (By clicking on it)");
  
          paintPixel(pixelX, pixelY, color);
-         pixels.set(`pixel_${pixelX}_${pixelY}`, {color : color});
+         // pixels.set(`pixel_${pixelX}_${pixelY}`, {color : color});
+         setPixels((prevPixels) => prevPixels.set(`pixel_${pixelX}_${pixelY}`, {color : color}));
          console.log("draw pixels added (xycolor) : " + pixelX, pixelY, color);
          console.log("draw has : " + pixels.has(`pixel_${pixelX}_${pixelY}`));
          console.log("draw has : " + pixels.get(`pixel_${pixelX}_${pixelY}`).color);
@@ -77,10 +78,11 @@
      const show = (e) => {
  
        const {pixelX: currentX, pixelY: currentY} = getMousePos(canvasRef.current, e); 
- 
+        console.log('les clés ' + pixels.keys().next().value);
        if (pos && !pixels.has(`pixel_${pos.x}_${pos.y}`)) hide2(pos.x, pos.y);
  
-       if(pixels.has(`pixel_${currentX}_${currentY}`)){
+        if(pixels.has(`pixel_${currentX}_${currentY}`)){
+        // if(pixels.has(`pixel_9_0`)){
          console.log("current pixel"+currentX+' '+currentY+ " issssss save");
          return;
  
