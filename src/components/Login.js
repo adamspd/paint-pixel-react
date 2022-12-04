@@ -51,7 +51,7 @@ function Login() {
             console.log('ici le theme reçu : ' + response.data.user.theme);
             console.log('ici le theme initialisé : ' + getTheme());
             InitTheme(response.data.user.theme);
-            navigate('/');
+            navigate('/dashboard');
 
         } catch (error) {
             setErrMsg('No Server Response' + error);
