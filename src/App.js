@@ -1,6 +1,6 @@
 import React from 'react'
 import {Outlet, Route, Routes, useNavigate} from 'react-router-dom'
-import './css/App.css'
+import './scss/App.css'
 import RouterProtecter from './RouterProtecter';
 import {useContext} from 'react';
 import {Theme} from './utils/Theme';

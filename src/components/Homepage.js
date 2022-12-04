@@ -5,7 +5,7 @@ import {Theme} from '../utils/Theme';
 import PixelBoard from './PixelBoard';
 import {logout} from '../utils/utils';
 import {Sidebar} from './index'
-import '../css/homepage.scss'
+import '../scss/homepage.scss'
 
 function Homepage(props) {
     let navigate = useNavigate();

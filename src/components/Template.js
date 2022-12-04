@@ -1,5 +1,5 @@
 import React from 'react'
-import '../css/template.scss'
+import '../scss/template.scss'
 import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
 
