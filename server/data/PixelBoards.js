@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const PixelBoardSchema = new Schema({
     title: String,
-    statut: { type: Boolean, default: false},
+    statut: { type: Boolean, default: true},
     createdAt: { type: Date, default: Date.now},
     dealine: { type: Date},
     boardSize: {type: Number, required: true},

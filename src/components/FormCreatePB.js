@@ -3,6 +3,8 @@ import {useRef, useState, useEffect} from 'react'
 import axios from '../utils/axios'
 import {Sidebar} from './index';
 import '../scss/createPixelBoard.scss'
+import { getCurrentUser } from '../utils/utils';
+import PixelBoard from './PixelBoard';
 
 
 const CREATE_PIXELBOARD_URL = '/pixelboard/create'
@@ -11,18 +13,21 @@ function FormCreatePB() {
 
     const titleRef = useRef();
     const [title, setTile] = useState('');
-    const [author, setAuthor] = useState('6380e75cd3eebc1a416fe876');
+    const [author, setAuthor] = useState("");
     const [dealine, setDealine] = useState(new Date());
     const [isValidDeadline, setIsValidDeadline] = useState(false);
-    const [statut, setStatut] = useState(false);
-    const [boardSize, setBoardSize] = useState(0);
+    const [statut, setStatut] = useState(500);
+    const [boardSize, setBoardSize] = useState(500);
     const [pixelModification, setPixelModification] = useState(false);
     const [timeLimit, setTimeLimit] = useState(false);
+    const [success, setSuccess] = useState(false);
 
 
     useEffect(() => {
         titleRef.current.focus();
-    }, []);
+        const username = sessionStorage.getItem('user');
+        setAuthor( username);
+    }, [author]);
 
 
     useEffect(() => {
@@ -40,15 +45,15 @@ function FormCreatePB() {
 
 
     const handleSubmit = async (e) => {
+        e.preventDefault();
         try {
-            console.log("ici react");
             const response = await axios.post(CREATE_PIXELBOARD_URL, JSON.stringify({
                 title, statut, dealine, boardSize, author, pixelModification, timeLimit
             }), {
                 headers: {'Content-Type': 'application/json'}, withCredentials: true
             });
-            console.log("ici react 1");
             console.log(response.data);
+            setSuccess(() => true);
 
 
         } catch (error) {
@@ -66,7 +71,7 @@ function FormCreatePB() {
 
     return (
         <Sidebar>
-            <section className='createPixelBoardForm'>
+            {!success ? <section className='createPixelBoardForm'>
                 <h1>Create Pixel Board</h1>
                 <div>
                     <form onSubmit={handleSubmit}>
@@ -84,7 +89,7 @@ function FormCreatePB() {
                             </input>
                         </div>
 
-                        <div>
+                        {/* <div>
                             <label htmlFor='status'>Status:
                                 <input
                                     id='statut'
@@ -94,7 +99,7 @@ function FormCreatePB() {
                                     onChange={(e) => setStatut(e.target.value)}
                                 >
                                 </input></label>
-                        </div>
+                        </div> */}
 
                         <div>
                             <label htmlFor='dealine'>Dealine</label>
@@ -112,17 +117,21 @@ function FormCreatePB() {
                             <label htmlFor='boardSize'>
                                 BoardSize: {boardSize}
                             </label>
-                            <input
+                            <select
                                 id='boardSize'
-                                type='range'
-                                min="5"
-                                max="100"
-                                step="5"
-                                required={true}
+                                // type='range'
+                                // min="5"
+                                // max="100"
+                                // step="5"
+                                
+                                // required={true}
                                 onChange={(e) => setBoardSize(e.target.value)}
                                 value={boardSize}
                             >
-                            </input>
+                                <option value='500' label='500 x 500'></option>
+                                <option value='1000' label='1000 x 1000'> </option>
+                                <option value='200' label='200 x 200' ></option>
+                            </select>
                         </div>
 
                         <div>
@@ -131,7 +140,7 @@ function FormCreatePB() {
                                 <input
                                     id='pixelModification'
                                     type='checkbox'
-                                    required={true}
+                                    // required={true}
                                     className='checkbox'
                                     onChange={(e) => setPixelModification(e.target.value)}
                                     value={pixelModification}
@@ -151,6 +160,8 @@ function FormCreatePB() {
                                 required={true}
                                 onChange={(e) => setTimeLimit(e.target.value)}
                                 value={timeLimit}
+                                min="0"
+                                max="60"
                             >
                             </input>
                         </div>
@@ -161,7 +172,8 @@ function FormCreatePB() {
                         </div>
                     </form>
                 </div>
-            </section>
+            </section> : <PixelBoard size= {boardSize} author= {author} />}
+            
         </Sidebar>
     )
 }

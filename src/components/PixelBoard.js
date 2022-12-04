@@ -2,14 +2,16 @@
  import React, { useEffect, useState, useRef } from 'react'
  import '../scss/pixelboard.scss'
  
- function PixelBoard() {
+ function PixelBoard(props) {
  
-   const WIDTH = 500;
-   const HEIGHT = 500;
+   const WIDTH = props.size;
+   const HEIGHT = props.size;
  
-   const PIXEL_WIDTH = WIDTH / 100;
-   const PIXEL_HEIGHT = HEIGHT / 100;
+   const PIXEL_WIDTH = WIDTH / 10;
+   const PIXEL_HEIGHT = HEIGHT / 10;
+
    const colorTab = ['red', 'blue', 'green', 'gray', 'yellow', 'pink', 'aqua'];
+
    const canvasRef = useRef(null);
  
    const [color, setColor] = useState(null); 
@@ -19,6 +21,10 @@
    const [pos, setPos] = useState(null);
  
    const [pixels, setPixels] = useState(new Map());
+   
+   const syntaxe = (x, y) => {
+    return `pixel_${x}_${y}`
+   }
  
      useEffect(() => {
  
@@ -46,6 +52,9 @@
          context.fillRect(pixelX,pixelY, PIXEL_WIDTH, PIXEL_HEIGHT);
  
      };
+     const initialize = ()=> {
+
+     };
  
      function getMousePos(canvas, evt) {
        var rect = canvas.getBoundingClientRect();
@@ -65,29 +74,30 @@
  
          paintPixel(pixelX, pixelY, color);
          // pixels.set(`pixel_${pixelX}_${pixelY}`, {color : color});
-         setPixels((prevPixels) => prevPixels.set(`pixel_${pixelX}_${pixelY}`, {color : color}));
+         setPixels((prevPixels) => prevPixels.set(syntaxe(pixelX, pixelY), {color : color}));
          console.log("draw pixels added (xycolor) : " + pixelX, pixelY, color);
-         console.log("draw has : " + pixels.has(`pixel_${pixelX}_${pixelY}`));
-         console.log("draw has : " + pixels.get(`pixel_${pixelX}_${pixelY}`).color);
+         console.log("draw has : " + pixels.has(syntaxe(pixelX, pixelY)));
+         //console.log("draw has : " + pixels.get(syntaxe(pixelX, pixelY)).color);
          console.log("draw keys : " + pixels);
          pixels.forEach((value, key, innerMap) => {
  
          })
  
      };
+
      const show = (e) => {
  
        const {pixelX: currentX, pixelY: currentY} = getMousePos(canvasRef.current, e); 
         console.log('les clés ' + pixels.keys().next().value);
-       if (pos && !pixels.has(`pixel_${pos.x}_${pos.y}`)) hide2(pos.x, pos.y);
+       if (pos && !pixels.has(syntaxe(pos.x, pos.y))) hide2(pos.x, pos.y);
  
-        if(pixels.has(`pixel_${currentX}_${currentY}`)){
+        if(pixels.has(syntaxe(currentX, currentY))){
         // if(pixels.has(`pixel_9_0`)){
          console.log("current pixel"+currentX+' '+currentY+ " issssss save");
          return;
  
          
-       }else if (!pixels.has(`pixel_${currentX}_${currentY}`)){
+       }else if (!pixels.has(syntaxe(currentX, currentY))){
  
          setPos(()=> ({x: currentX, y : currentY}))
          paintPixel(currentX, currentY, hoverColor);
@@ -118,6 +128,7 @@
       
    return (
      <>
+     <h1>Author : {props.author}</h1>
      <h1 hidden={!warning ? true : false}>{warning}</h1>
      <section className="container">
  
