@@ -2,7 +2,7 @@ import React from 'react'
 import {useRef, useEffect, useState} from 'react'
 import {Link} from 'react-router-dom';
 import axios from '../utils/axios'
-import '../css/signup.css'
+import '../css/signup.scss'
 
 
 const CREATE_USER_URL = '/creaseUser'
