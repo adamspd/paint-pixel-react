@@ -1,6 +1,7 @@
+import React, {useEffect, useState, useRef} from 'react'
+import '../scss/pixelboard.scss'
+import axios from '../utils/axios';
 
- import React, { useEffect, useState, useRef } from 'react'
- import '../scss/pixelboard.scss'
  
  function PixelBoard(props) {
  
@@ -25,6 +26,10 @@
    const syntaxe = (x, y) => {
     return `pixel_${x}_${y}`
    }
+
+
+  
+
  
      useEffect(() => {
  
