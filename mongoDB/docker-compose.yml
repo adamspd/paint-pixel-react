@@ -7,7 +7,7 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
-    container_name: mongoPaint
+    container_name: mongopp
     # restart: always
     # environment:
     #   MONGO_INITDB_ROOT_USERNAME: root

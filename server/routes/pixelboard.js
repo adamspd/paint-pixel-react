@@ -31,4 +31,15 @@ router.get("/count", async (req, res) => {
     }
 });
 
+router.get('/byauthor/:author', async (req, res) => {
+    console.log("Queried by author function called ", req.params.author)
+    try {
+        const pixelboards = await pixelboard.find({author: req.params.author});
+        res.status(200).json({success: true, 'pb': pixelboards});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({success: false, 'message': 'Server does not respond'});
+    }
+});
+
 module.exports = router;

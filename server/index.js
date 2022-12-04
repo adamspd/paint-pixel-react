@@ -1,7 +1,7 @@
 const express = require('express');
 const {default: mongoose} = require('mongoose');
 const connectDB = require('./utils/mongorequest');
-const {createUsers, createPixelBoards} = require('./Services/initialisationData');
+// const {createUsers, createPixelBoards} = require('./Services/initialisationData');
 const cors = require('cors');
 const passport = require('passport');
 const passportJWT = require('./utils/passportJWT');
@@ -34,8 +34,8 @@ app.use("/users", users)
 
 mongoose.connection.once('open', () => {
     console.log("Connected to the DataBase!");
-    createUsers().catch(console.error())
-    createPixelBoards().catch(console.error());
+    // createUsers().catch(console.error())
+    // createPixelBoards().catch(console.error());
     app.listen(PORT, () => {
         console.log('the Api is listenning at port : ' + PORT);
     });

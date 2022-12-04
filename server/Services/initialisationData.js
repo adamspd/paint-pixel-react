@@ -1,3 +1,4 @@
+/*
 const User = require('../data/users');
 const PixelBoard = require('../data/PixelBoards');
 
@@ -39,4 +40,4 @@ const createPixelBoards = async () => {
     });
 }
 
-module.exports = {createUsers, createPixelBoards}
+module.exports = {createUsers, createPixelBoards}*/
