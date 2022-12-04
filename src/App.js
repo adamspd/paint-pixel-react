@@ -6,6 +6,7 @@ import {useContext} from 'react';
 import {Theme} from './utils/Theme';
 import {logout} from './utils/utils';
 import {Admin, Template, Sidebar, HomePage, SignUp, Login, PixelBoardCreate} from './components'
+import PublicHomePage from './components/PublicHomePage';
 
 function App() {
     const navigate = useNavigate();
@@ -17,10 +18,11 @@ function App() {
                 <section className={theme === 'dark' ? 'componentx' : 'darkmode'}>
                     <Template/>
                     <Routes>
+                        <Route path='/' element={<PublicHomePage/>}/>
                         <Route element={<RouterProtecter/>}>
                             <Route path='/PixelBoardCreate' element={<PixelBoardCreate/>}/>
                             <Route path='/Admin' element={<Admin/>}/>
-                            <Route path='/' element={<HomePage/>}/>
+                            <Route path='/dashboard' element={<HomePage/>}/>
                         </Route>
                         <Route path='/Login' element={<Login/>}/>
                         <Route path='/SignUp' element={<SignUp/>}/>
