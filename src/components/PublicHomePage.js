@@ -43,7 +43,7 @@ function PublicHomePage() {
 
     const login = () => {
         console.log("login");
-        navigate('/Login');
+        navigate('/dashboard');
     }
 
     const register = () => {
