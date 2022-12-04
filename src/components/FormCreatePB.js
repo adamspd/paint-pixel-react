@@ -2,7 +2,7 @@ import React from 'react'
 import {useRef, useState, useEffect} from 'react'
 import axios from '../utils/axios'
 import {Sidebar} from './index';
-import '../css/createPixelBoard.scss'
+import '../scss/createPixelBoard.scss'
 
 
 const CREATE_PIXELBOARD_URL = '/pixelboard/create'
