@@ -4,6 +4,8 @@ import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
 import PixelBoard from './PixelBoard';
 import {logout} from '../utils/utils';
+import {Sidebar} from './index'
+import '../scss/homepage.scss'
 
 function Homepage(props) {
     let navigate = useNavigate();
@@ -18,14 +20,15 @@ function Homepage(props) {
     };
 
     return (
-        <section>
-            <div>Welcome</div>
-            <button onClick={handeLogout}>Logout</button>
-            <button onClick={handeTheme}>Change Theme</button>
-  
-        <PixelBoard/>
-        
-      </section>
+        <div className="homepage">
+            <Sidebar>
+                <section>
+                    <button onClick={handeLogout}>Logout</button>
+                    <button onClick={handeTheme}>Change Theme</button>
+                    <PixelBoard/>
+                </section>
+            </Sidebar>
+        </div>
     )
 }
 
