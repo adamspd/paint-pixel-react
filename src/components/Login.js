@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import {useRef, useEffect} from 'react'
 import axios from '../utils/axios'
 import {Link, UNSAFE_DataRouterStateContext} from 'react-router-dom';
-import '../css/login.scss'
+import '../scss/login.scss'
 import {saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme} from '../utils/utils';
 import {useNavigate} from 'react-router-dom';
 import {Theme} from '../utils/Theme';

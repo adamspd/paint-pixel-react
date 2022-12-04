@@ -5,7 +5,7 @@ import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
 import {logout} from '../utils/utils';
 import {Link} from 'react-router-dom';
-import '../css/sidebar.scss';
+import '../scss/sidebar.scss';
 import {FaHome, FaBars, FaUserAlt, FaEdit, FaUserCog, FaSignOutAlt} from 'react-icons/fa';
 import {NavLink} from 'react-router-dom';
 

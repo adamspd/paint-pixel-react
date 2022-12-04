@@ -1,6 +1,6 @@
 import {warning} from '@remix-run/router';
 import React, {useEffect, useState, useRef} from 'react'
-import '../css/pixelboard.css'
+import '../scss/pixelboard.css'
 
 function PixelBoard() {
     const canvasRef = useRef(null);
