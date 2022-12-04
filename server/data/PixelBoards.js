@@ -11,7 +11,7 @@ const PixelBoardSchema = new Schema({
     author: { type: String},
     pixelModification: {type: Boolean, required: true},
     timeLimit: {type: Number, required: true},
-    
+    // pixelBoards: {type: Array, required: false}
 })
 
 module.exports = mongoose.model('PixelBoard', PixelBoardSchema)
