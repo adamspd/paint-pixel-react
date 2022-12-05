@@ -79,7 +79,10 @@ function PixelBoard(props) {
     };
 
     const show = (e) => {
-        if (color) setHoverColor(color);
+        if (color) {
+            setHoverColor(color);
+            setWarning(false);
+        }
         const {pixelX: currentX, pixelY: currentY} = getMousePos(canvasRef.current, e);
         // console.log('les clés ' + pixels.keys().next().value);
         if (pos && !pixels.has(syntaxe(pos.x, pos.y))) hide2(pos.x, pos.y);
