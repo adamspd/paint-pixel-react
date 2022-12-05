@@ -139,7 +139,7 @@ function Signup() {
 
                         <div>
                             <label htmlFor='confirmPassword'>
-                                Password:&nbsp;
+                                Confirm Password:&nbsp;
                             </label>
                             <input
                                 id='confirmPassword'

@@ -3,7 +3,10 @@ import {useRef, useEffect} from 'react'
 import axios from '../utils/axios'
 import {Link, UNSAFE_DataRouterStateContext} from 'react-router-dom';
 import '../scss/login.scss'
-import {saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme,saveUser, getCurrentUser} from '../utils/utils';
+import {
+    saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme, saveUser, saveUserFirstName,
+    saveUserLastName, saveUsername
+} from '../utils/utils';
 import {useNavigate} from 'react-router-dom';
 import {Theme} from '../utils/Theme';
 import {useContext} from 'react';
@@ -43,21 +46,18 @@ function Login() {
                 headers: {'Content-Type': 'application/json'}, withCredentials: true
             });
 
-           // console.log(response.data.user);
+            // console.log(response.data.user);
             saveUser(response.data.user);
-   
+
 
             logout();
             saveJwt(response.data.token);
             saveTheme(response.data.user.theme);
-            console.log(getTheme());
-
-            console.log('ici le theme reçu : ' + response.data.user.theme);
-            console.log('ici le theme initialisé : ' + getTheme());
             InitTheme(response.data.user.theme);
             saveUser(response.data.user);
-            console.log(getCurrentUser());
-            console.log("user : "+ response.data.user);
+            saveUsername(response.data.user.username);
+            saveUserFirstName(response.data.user.firstname);
+            saveUserLastName(response.data.user.lastname);
             navigate('/dashboard');
 
         } catch (error) {
@@ -78,53 +78,53 @@ function Login() {
     return (<>
         {success ?
             <section>
-            <h4>Vous êtes Connecté</h4>
-        </section> : <section className='loginForm'>
-            <div className='headerTitle'>
-                <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
-                    {errMsg}
-                </p>
-                <h1>Connexion</h1>
-            </div>
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label htmlFor='usermane'>Username:&nbsp;</label>
+                <h4>Vous êtes Connecté</h4>
+            </section> : <section className='loginForm'>
+                <div className='headerTitle'>
+                    <p className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">
+                        {errMsg}
+                    </p>
+                    <h1>Connexion</h1>
+                </div>
+                <div>
+                    <form onSubmit={handleSubmit}>
+                        <div>
+                            <label htmlFor='usermane'>Username:&nbsp;</label>
+                            <input
+                                id='usermane'
+                                type='text'
+                                ref={userNameInput}
+                                required={true}
+                                autoComplete='off'
+                                value={userName}
+                                onChange={(e) => setUserName(e.target.value)}
+                            >
+                            </input>
+                        </div>
+                        <label htmlFor='password'>
+                            Password:&nbsp;
+                        </label>
                         <input
-                            id='usermane'
-                            type='text'
-                            ref={userNameInput}
+                            id='password'
+                            type='password'
                             required={true}
                             autoComplete='off'
-                            value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
+                            value={password}
                         >
                         </input>
-                    </div>
-                    <label htmlFor='password'>
-                        Password:&nbsp;
-                    </label>
-                    <input
-                        id='password'
-                        type='password'
-                        required={true}
-                        autoComplete='off'
-                        onChange={(e) => setPassword(e.target.value)}
-                        value={password}
-                    >
-                    </input>
-                    <div>
-                        <p>
-                            Not a member yet ?&nbsp;
-                            <Link to='/signup'>Register here</Link>
-                        </p>
-                    </div>
-                    <div>
-                        <button className='loginButton'>Login</button>
-                    </div>
-                </form>
-            </div>
-        </section>}
+                        <div>
+                            <p>
+                                Not a member yet ?&nbsp;
+                                <Link to='/signup'>Register here</Link>
+                            </p>
+                        </div>
+                        <div>
+                            <button className='loginButton'>Login</button>
+                        </div>
+                    </form>
+                </div>
+            </section>}
     </>)
 }
 
