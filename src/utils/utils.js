@@ -2,7 +2,7 @@
 
 const saveJwt = (jwt) => {
     sessionStorage.setItem('jwt', jwt)
-        
+
 }
 
 const logout = () => {
@@ -10,7 +10,7 @@ const logout = () => {
 }
 
 const isAuthenticate = () => {
-    if (sessionStorage.getItem('jwt')) return true 
+    if (sessionStorage.getItem('jwt')) return true
     else return false
 }
 
@@ -27,19 +27,28 @@ const getTheme = () => {
 }
 
 const switchTheme = async (themee) => {
-   const theme  = themee === 'light' ? 'dark' : 'light';
+    const theme = themee === 'light' ? 'dark' : 'light';
     sessionStorage.setItem('theme', theme);
     return theme;
-
-
 }
-const saveUser = (currentUser)=> {
+const saveUser = (currentUser) => {
     const {username} = currentUser
-    console.log('save' + username);
     sessionStorage.setItem('user', username)
 }
-const getCurrentUser = ()=> {
-     sessionStorage.getItem('user');
+
+const saveUsername = (username) => {
+    sessionStorage.setItem('username', username);
 }
 
-module.exports = { saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme ,switchTheme, saveUser, getCurrentUser}
+const saveUserFirstName = (firstName) => {
+    sessionStorage.setItem('firstName', firstName);
+}
+
+const saveUserLastName = (lastName) => {
+    sessionStorage.setItem('lastName', lastName);
+}
+
+module.exports = {
+    saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme, saveUser, saveUsername,
+    saveUserFirstName, saveUserLastName
+}

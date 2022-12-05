@@ -3,7 +3,6 @@ import {useRef, useState, useEffect} from 'react'
 import axios from '../utils/axios'
 import {Sidebar} from './index';
 import '../scss/createPixelBoard.scss'
-import { getCurrentUser } from '../utils/utils';
 import PixelBoard from './PixelBoard';
 
 
@@ -14,9 +13,9 @@ function FormCreatePB() {
     const titleRef = useRef();
     const [title, setTile] = useState('');
     const [author, setAuthor] = useState("");
-    const [dealine, setDealine] = useState(new Date());
+    const [deadline, setDeadline] = useState(new Date());
     const [isValidDeadline, setIsValidDeadline] = useState(false);
-    const [statut, setStatut] = useState(500);
+    const [status, setStatus] = useState(500);
     const [boardSize, setBoardSize] = useState(500);
     const [pixelModification, setPixelModification] = useState(false);
     const [timeLimit, setTimeLimit] = useState(false);
@@ -32,23 +31,23 @@ function FormCreatePB() {
 
     useEffect(() => {
         setTile(title);
-        setStatut(statut);
+        setStatus(status);
         setBoardSize(boardSize);
         setPixelModification(pixelModification);
         setTimeLimit(timeLimit);
 
-    }, [title, dealine, isValidDeadline, statut, boardSize, pixelModification, timeLimit]);
+    }, [title, deadline, isValidDeadline, status, boardSize, pixelModification, timeLimit]);
 
     useEffect(() => {
-        (new Date(dealine) <= new Date()) ? setIsValidDeadline(true) : setIsValidDeadline(false);
-    }, [dealine]);
+        (new Date(deadline) <= new Date()) ? setIsValidDeadline(true) : setIsValidDeadline(false);
+    }, [deadline]);
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post(CREATE_PIXELBOARD_URL, JSON.stringify({
-                title, statut, dealine, boardSize, author, pixelModification, timeLimit
+                title, status, deadline, boardSize, author, pixelModification, timeLimit
             }), {
                 headers: {'Content-Type': 'application/json'}, withCredentials: true
             });
@@ -92,23 +91,23 @@ function FormCreatePB() {
                         {/* <div>
                             <label htmlFor='status'>Status:
                                 <input
-                                    id='statut'
+                                    id='status'
                                     type='checkbox'
-                                    value={statut}
+                                    value={status}
                                     className='checkbox'
-                                    onChange={(e) => setStatut(e.target.value)}
+                                    onChange={(e) => setStatus(e.target.value)}
                                 >
                                 </input></label>
                         </div> */}
 
                         <div>
-                            <label htmlFor='dealine'>Dealine</label>
+                            <label htmlFor='deadline'>deadline</label>
                             <input
-                                id='dealine'
+                                id='deadline'
                                 type='date'
                                 autoComplete='off'
-                                value={dealine}
-                                onChange={(e) => setDealine(e.target.value)}
+                                value={deadline}
+                                onChange={(e) => setDeadline(e.target.value)}
                             >
                             </input>
                         </div>
@@ -172,7 +171,7 @@ function FormCreatePB() {
                         </div>
                     </form>
                 </div>
-            </section> : <PixelBoard size= {boardSize} author= {author} />}
+            </section> : <PixelBoard size={boardSize} author={author} title={title} />}
             
         </Sidebar>
     )

@@ -13,7 +13,7 @@ const Sidebar = ({children}) => {
     const[isOpened, setIsOpened] = useState(false);
     const toggle = () => setIsOpened(!isOpened);
     const menuItem = [
-        {name: 'Home', path: '/', icon: <FaHome/>},
+        {name: 'Home', path: '/dashboard', icon: <FaHome/>},
         {name: 'PixelBoardCreate', path: '/PixelBoardCreate', icon: <FaEdit/>},
         {name: 'Admin', path: '/Admin', icon: <FaUserCog/>},
     ];
