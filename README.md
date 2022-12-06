@@ -28,7 +28,7 @@ Judicaêl Nshimiye - Judicael99
 Adams Pierre David - adamspd
 
 ### Website
-The Project is deployed on `paintpixel.adamspierredavid.com`
+The Project is deployed on [https://paintpixel.adamspierredavid.com](https://paintpixel.adamspierredavid.com)
 
 ##  Installation
 
