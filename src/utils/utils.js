@@ -47,7 +47,16 @@ const saveUserLastName = (lastName) => {
     sessionStorage.setItem('lastName', lastName);
 }
 
-module.exports = {
-    saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme, saveUser, saveUsername,
-    saveUserFirstName, saveUserLastName
+export {
+    saveJwt,
+    isAuthenticate,
+    getJwt,
+    logout,
+    saveTheme,
+    getTheme,
+    switchTheme,
+    saveUser,
+    saveUsername,
+    saveUserFirstName,
+    saveUserLastName
 }

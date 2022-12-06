@@ -44,6 +44,7 @@ function FormCreatePB() {
         setBoardSize(boardSize);
         setPixelModification(pixelModification);
         setTimeLimit(timeLimit);
+        setPixelBoard([])
 
     }, [title, deadline, isValidDeadline, status, boardSize, pixelModification, timeLimit]);
 
