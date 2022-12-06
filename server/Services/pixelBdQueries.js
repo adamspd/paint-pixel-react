@@ -13,20 +13,10 @@ const createPixelBoard = async (title, deadline, boardSize, author, pixelModific
         author: author,
         pixelModification: pixelModification,
         timeLimit: timeLimit,
-        pixelBoards: null
+        pixelBoards: []
     });
     await pixelboard.save();
     return pixelboard._id;
-    // await PixelBoard.create({
-    //     title,
-    //     deadline,
-    //     boardSize,
-    //     author,
-    //     pixelModification,
-    //     timeLimit,
-    //
-    // }).then(console.log).catch((err) => console.log(err));
-
 };
 
 module.exports = {listPixelBoard, createPixelBoard}

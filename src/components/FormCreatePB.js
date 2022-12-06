@@ -9,7 +9,6 @@ import PixelBoard from './PixelBoard';
 const CREATE_PIXELBOARD_URL = '/pixelboard/create'
 
 function FormCreatePB() {
-
     const titleRef = useRef();
     const [title, setTile] = useState('');
     const [author, setAuthor] = useState("");
@@ -20,6 +19,7 @@ function FormCreatePB() {
     const [pixelModification, setPixelModification] = useState(false);
     const [timeLimit, setTimeLimit] = useState(false);
     const [success, setSuccess] = useState(false);
+    const [pixelBoard, setPixelBoard] = useState([]);
 
 
     useEffect(() => {
@@ -27,7 +27,6 @@ function FormCreatePB() {
         const username = sessionStorage.getItem('user');
         setAuthor( username);
     }, [author]);
-
 
     useEffect(() => {
         setTile(title);
@@ -171,7 +170,7 @@ function FormCreatePB() {
                         </div>
                     </form>
                 </div>
-            </section> : <PixelBoard size={boardSize} author={author} title={title} />}
+            </section> : <PixelBoard size={boardSize} author={author} title={title} pixels={pixelBoard} />}
             
         </Sidebar>
     )
