@@ -1,13 +1,8 @@
 // if connected, add a sidebar menu
-import React, {useState, useEffect} from 'react';
-import {useNavigate} from "react-router-dom";
-import {useContext} from 'react';
-import {Theme} from '../utils/Theme';
-import {logout} from '../utils/utils';
-import {Link} from 'react-router-dom';
+import React, {useState} from 'react';
+import {NavLink} from "react-router-dom";
 import '../scss/sidebar.scss';
-import {FaHome, FaBars, FaUserAlt, FaEdit, FaUserCog, FaSignOutAlt} from 'react-icons/fa';
-import {NavLink} from 'react-router-dom';
+import {FaBars, FaEdit, FaHome, FaUserCog,} from 'react-icons/fa';
 
 const Sidebar = ({children}) => {
     const[isOpened, setIsOpened] = useState(false);
@@ -15,7 +10,7 @@ const Sidebar = ({children}) => {
     const menuItem = [
         {name: 'Home', path: '/dashboard', icon: <FaHome/>},
         {name: 'PixelBoardCreate', path: '/PixelBoardCreate', icon: <FaEdit/>},
-        {name: 'Admin', path: '/Admin', icon: <FaUserCog/>},
+        {name: 'Admin', path: '/admin', icon: <FaUserCog/>},
     ];
 
     return (

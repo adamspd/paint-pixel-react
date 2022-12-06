@@ -1,15 +1,9 @@
-import React, {useState} from 'react'
-import {useRef, useEffect} from 'react'
+import React, {useContext, useEffect, useRef, useState} from 'react'
 import axios from '../utils/axios'
-import {Link, UNSAFE_DataRouterStateContext} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import '../scss/login.scss'
-import {
-    saveJwt, logout, isAuthenticate, getJwt, saveTheme, getTheme, switchTheme, saveUser, saveUserFirstName,
-    saveUserLastName, saveUsername
-} from '../utils/utils';
-import {useNavigate} from 'react-router-dom';
+import {logout, saveJwt, saveTheme, saveUser, saveUserFirstName, saveUserLastName, saveUsername} from '../utils/utils';
 import {Theme} from '../utils/Theme';
-import {useContext} from 'react';
 
 
 const LOGIN_URL = '/login'
@@ -24,6 +18,13 @@ function Login() {
     const [password, setPassword] = useState('');
     const [success, setSuccess] = useState(false);
     const [errMsg, setErrMsg] = useState("");
+
+    /**
+     * Setting the page's title
+     */
+    useEffect(() => {
+        document.title = 'Login';
+    }, []);
 
 
     useEffect(() => {
