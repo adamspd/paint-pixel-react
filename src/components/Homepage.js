@@ -8,7 +8,7 @@ import {Sidebar} from './index'
 import '../scss/homepage.scss'
 import axios from '../utils/axios';
 
-function Homepage(props) {
+function Homepage() {
     let navigate = useNavigate();
     const {theme, ChangeTheme} = useContext(Theme);
     const [pixelBoard, setPixelBoard] = useState(null);

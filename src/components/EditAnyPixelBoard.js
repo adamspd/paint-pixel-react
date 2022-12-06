@@ -20,7 +20,6 @@ function EditAnyPixelBoard(props) {
      */
     useEffect(() => {
         document.title = 'Playing with the Pixels';
-        console.log("The id is " + id);
     }, []);
 
     const handeLogout = () => {
@@ -37,7 +36,6 @@ function EditAnyPixelBoard(props) {
         if (id !== null) {
             axios.get('/pixelboard/get-pb/' + id).then(
                 (response) => {
-                    console.log(response.data.data)
                     setPixelBoard(response.data.data)
                 })
         } else {
