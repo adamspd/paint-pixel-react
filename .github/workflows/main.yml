@@ -28,5 +28,5 @@ jobs:
           script: |
             cd /home/debian/paintpixel/html
             rm -rf *
-            cp -r /home/runner/work/paintpixel/paintpixel/build/* /home/debian/paintpixel/html
+            cp -r ./build/* /home/debian/paintpixel/html
             sudo service nginx restart
