@@ -37,6 +37,50 @@ router.patch("/update-pb/:id", async (req, res) => {
     }
 });
 
+router.patch("/save-pixel/:id/:x/:y/:color", async (req, res) => {
+    const id = req.params.id;
+    const x = req.params.x;
+    const y = req.params.y;
+    const color = req.params.color;
+    // get pixelboard
+    // const pb = await pixelboard.find({id: id});
+    // create object pixel with x, y and color
+    const pixelObj = {
+        x: x,
+        y: y,
+        color: color
+    }
+
+    console.log("Info well received ", id, pixelObj);
+    try {
+        // add pixelObj to pb.pixelBoards
+        pixelboard.findByIdAndUpdate(
+            {_id: id},
+            {$push: {pixelBoards: pixelObj}},
+            {safe: true, upsert: true},
+            function(err, doc) {
+                console.log("doc", doc);
+                if (err) {
+                    console.log(err);
+                } else {
+                    console.log("success");
+                }
+            }
+        );
+        // console.log("pb", pb);
+        res.status(200).json({
+            'message': 'PixelBoard Updated !',
+            'id': id,
+            'pixel': pixelObj,
+        });
+    } catch (err) {
+        console.log(err)
+        res.status(400).json({
+            'message': 'PixelBoard not found !',
+        });
+    }
+});
+
 router.get("/count", async (req, res) => {
     try{
         const pb = await pixelboard.find();

@@ -54,7 +54,7 @@ function PublicHomePage() {
     return (
         <div className="publicHomepage" id='publicHomepage'>
             <div className="root">
-                <Collapse in={checked} {...(checked ? {timeout: 1000} : {})} collapseHeight={50}>
+                <Collapse in={checked} {...(checked ? {timeout: 1000} : {})}>
                     <div className="title">
                         <h1 className='welcome'>
                             Welcome to <br/> Paint&nbsp;
@@ -88,7 +88,7 @@ function PublicHomePage() {
                     </div>
                     <div className="container">
                         <div className="card">
-                            <div className="cardContent" check={check}>
+                            <div className="cardContent">
                                 <h1 className='cardTitle'>Register</h1>
                                 <p className='cardText'>Create your own account now </p>
                                 <button onClick={register}>Register now</button>
