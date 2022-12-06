@@ -28,6 +28,7 @@ jobs:
           script: |
             cd /home/debian/paintpixel/code/paint-pixel-react
             git pull origin main
+            npm config set legacy-peer-deps true
             npm run build
             cd /home/debian/paintpixel/html
             rm -rf *
