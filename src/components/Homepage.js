@@ -13,6 +13,13 @@ function Homepage(props) {
     const {theme, ChangeTheme} = useContext(Theme);
     const [pixelBoard, setPixelBoard] = useState(null);
 
+    /**
+     * Setting the page's title
+     */
+    useEffect(() => {
+        document.title = 'Painting Pixel';
+    }, []);
+
     const handeLogout = () => {
         logout();
         navigate('/Login');

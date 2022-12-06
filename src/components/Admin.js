@@ -1,16 +1,24 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {Sidebar} from './index'
 
-function admin() {
-  return (
-      <div className="homepage">
-        <Sidebar>
-          <section>
-            <h1>Admin</h1>
-          </section>
-        </Sidebar>
-      </div>
-  )
+function Admin() {
+
+    /**
+     * Setting the page's title
+     */
+    useEffect(() => {
+        document.title = 'Admin';
+    }, []);
+
+    return (
+        <div className="homepage">
+            <Sidebar>
+                <section>
+                    <h1>Admin</h1>
+                </section>
+            </Sidebar>
+        </div>
+    )
 }
 
-export default admin
+export default Admin
