@@ -19,6 +19,7 @@ jobs:
       - run: npm config set legacy-peer-deps true
       - run: npm install
       - run: CI='' npm run build
+
       - uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
@@ -27,10 +28,6 @@ jobs:
           port: ${{ secrets.PORT }}
           script: |
             cd /home/debian/paintpixel/code/paint-pixel-react
-            git pull origin main
-            npm config set legacy-peer-deps true
-            npm run build
-            cd /home/debian/paintpixel/html
-            rm -rf *
-            cp -r /home/debian/paintpixel/code/paint-pixel-react/build/* /home/debian/paintpixel/html
+            git pull origin main;
+            bash ./run.sh
             sudo service nginx restart
