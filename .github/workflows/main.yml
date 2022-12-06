@@ -28,5 +28,8 @@ jobs:
           script: |
             cd /home/debian/paintpixel/html
             rm -rf *
-            cp -r /home/runner/work/paint-pixel-react/paint-pixel-react/build/* /home/debian/paintpixel/html
+            cd /home/debian/paintpixel/code
+            git pull origin main
+            npm run build
+            cp -r /home/debian/paintpixel/code/build/* /home/debian/paintpixel/html
             sudo service nginx restart
