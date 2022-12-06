@@ -26,8 +26,7 @@ function Homepage(props) {
                     const {pb} = response.data;
                     setPixelBoard(pb[0])
                     console.log(pb[0])
-                }
-            )
+                })
         } else {
 
         }
@@ -42,9 +41,13 @@ function Homepage(props) {
         <div className="homepage">
             <Sidebar>
                 <section>
+                    {pixelBoard?.id}
                     <button onClick={handeLogout}>Logout</button>
                     <button onClick={handeTheme}>Change Theme</button>
-                    {pixelBoard ? <PixelBoard size={pixelBoard?.boardSize} author={pixelBoard?.author} title={pixelBoard?.title}/> : <h1>There is no pixelboard</h1>}
+                    {pixelBoard ? <PixelBoard size={pixelBoard?.boardSize} author={pixelBoard?.author}
+                                              title={pixelBoard?.title} p_id={pixelBoard?._id}
+                                              pixels={pixelBoard?.pixelBoards}/> :
+                        <h1>There is no pixelboard</h1>}
                 </section>
             </Sidebar>
         </div>
