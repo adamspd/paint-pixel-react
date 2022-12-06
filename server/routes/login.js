@@ -10,8 +10,8 @@ const {issueJWT} = require('../utils/utils');
 router.post("/", (req, res, next) => {
     try {
         User.findOne({username: req.body.username}, function (err, user) {
-            if (err) return res.status(403).json({'message': 'Username and password didn t match.'});
-            if (!user) return res.status(401).json({'message': 'Username not exist.'});
+            if (err) return res.status(403).json({success: false, 'message': "Username and password didn't match."});
+            if (!user) return res.status(401).json({success: false, 'message': "Username don't exist."});
 
             bcrypt.compare(req.body.password, user.password, (err, result) => {
                 if (err) throw err;
@@ -27,7 +27,7 @@ router.post("/", (req, res, next) => {
                 } else {
                     console.log(req.body.password);
                     console.log(user.password);
-                    res.status(401).json({'message': 'Wrong Credentials.'});
+                    res.status(401).json({success: false, 'message': 'Wrong Credentials.'});
                 }
             });
         });

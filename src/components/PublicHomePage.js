@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react'
-import {Link, useNavigate} from 'react-router-dom'
+import {useNavigate} from 'react-router-dom'
 import '../scss/publicHomepage.scss'
 import {FaChevronDown} from 'react-icons/fa'
 import {Collapse} from '@material-ui/core'
@@ -10,9 +10,18 @@ import axios from '../utils/axios'
 function PublicHomePage() {
     const [checked, setChecked] = React.useState(false);
     let navigate = useNavigate();
+
+    /**
+     * Setting the page's title
+     */
+    useEffect(() => {
+        document.title = 'Welcome to Paint Pixel';
+    }, []);
+
     useEffect(() => {
         setChecked(true);
     }, []);
+
     const check = useWindowPosition('card-container');
 
     // get number of users registered

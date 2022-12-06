@@ -22,10 +22,20 @@ function FormCreatePB() {
     const [pixelBoard, setPixelBoard] = useState([]);
 
 
+    /**
+     * Setting the page's title
+     */
+    useEffect(() => {
+        document.title = 'Create Pixel Board';
+    }, []);
+
+    /**
+     * Setting the author of a pixelboard
+     */
     useEffect(() => {
         titleRef.current.focus();
         const username = sessionStorage.getItem('user');
-        setAuthor( username);
+        setAuthor(username);
     }, [author]);
 
     useEffect(() => {
@@ -121,14 +131,14 @@ function FormCreatePB() {
                                 // min="5"
                                 // max="100"
                                 // step="5"
-                                
+
                                 // required={true}
                                 onChange={(e) => setBoardSize(e.target.value)}
                                 value={boardSize}
                             >
                                 <option value='500' label='500 x 500'></option>
-                                <option value='1000' label='1000 x 1000'> </option>
-                                <option value='200' label='200 x 200' ></option>
+                                <option value='1000' label='1000 x 1000'></option>
+                                <option value='200' label='200 x 200'></option>
                             </select>
                         </div>
 
@@ -170,8 +180,8 @@ function FormCreatePB() {
                         </div>
                     </form>
                 </div>
-            </section> : <PixelBoard size={boardSize} author={author} title={title} pixels={pixelBoard} />}
-            
+            </section> : <PixelBoard size={boardSize} author={author} title={title} pixels={pixelBoard}/>}
+
         </Sidebar>
     )
 }
