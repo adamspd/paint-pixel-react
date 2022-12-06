@@ -91,6 +91,27 @@ router.get("/count", async (req, res) => {
     }
 });
 
+router.get("/all", async (req, res) => {
+    try{
+        const pb = await pixelboard.find();
+        res.status(200).json({success: true, data: pb});
+    } catch(err){
+        console.log(err);
+        res.status(500).json({ 'message': 'Server does not respond' });
+    }
+});
+
+router.get("/get-pb/:id", async (req, res) => {
+    const id = req.params.id;
+    try {
+        const pb = await pixelboard.findById(id);
+        res.status(200).json({success: true, data: pb});
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ 'message': 'Server does not respond' });
+    }
+});
+
 router.get("/listpixelboard", async (req, res) => {
     try{
         const listpb = await pixelboard.find();

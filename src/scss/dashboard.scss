@@ -1,0 +1,34 @@
+$base-color: #1c0f16;
+$border-dark: rgba($base-color, 0.88);
+
+.container-pb {
+  margin: 10px 45px 10px 10px;
+}
+
+.main-container {
+  border-radius: 5px;
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
+  margin: 0 auto 5px;
+  padding: 20px;
+  width: 100%;
+  border-bottom: 1px solid $border-dark;
+  cursor: pointer;
+  color: $base-color;
+  justify-content: space-between;
+  gap: 3px;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+
+  &:hover {
+    background-color: #567393;
+    color: #FFFFFF;
+  }
+}
+
+.title-pb {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  font-size: 15px;
+  text-transform: uppercase;
+  font-family: "Nunito", sans-serif;
+}
