@@ -18,7 +18,7 @@ jobs:
       - uses: actions/setup-node@v2
       - run: npm config set legacy-peer-deps true
       - run: npm install
-      - run: npm run build
+      - run: CI='' npm run build
       - uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
