@@ -3,7 +3,7 @@ import '../scss/template.scss'
 import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
 import {Link} from 'react-router-dom'
-import {FaPaintRoller} from 'react-icons/fa';
+import logo from '../scss/logo.png'
 
 
 function Template() {
@@ -14,7 +14,8 @@ function Template() {
                 <nav>
                     <Link to='/'>
                         <h1 className='homepageBanner'>
-                            <FaPaintRoller/>&nbsp;
+                            <img src={logo} alt="Logo" height={30}/>&nbsp;&nbsp;
+                            {/*<FaPaintRoller/>&nbsp;*/}
                             Paint Pixel
                         </h1>
                     </Link>

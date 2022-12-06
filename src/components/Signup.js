@@ -19,6 +19,13 @@ function Signup() {
     const [success, setSuccess] = useState(false);
     const [errMsg, setErrMsg] = useState("");
 
+    /**
+     * Setting the page's title
+     */
+    useEffect(() => {
+        document.title = 'Registration';
+    }, []);
+
 
     useEffect(() => {
         userNameInput.current.focus();
