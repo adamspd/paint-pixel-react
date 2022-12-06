@@ -177,7 +177,6 @@ function PixelBoard(props) {
                         onMouseLeave={hide}
                 >
 
-
                 </canvas>
                 <div className='colorChoices'>
                     {colorTab.map((color, index) => (

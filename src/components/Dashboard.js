@@ -67,11 +67,11 @@ function Dashboard() {
                                             <Link to={{
                                                 pathname: `/edit-any-pixel-board/${pb._id}`
                                             }} key={index}>
-                                            <div key={index} className={"main-container"}>
+                                                <div key={index} className={"main-container"}>
                                                 <span
                                                     className={"title-pb"}>{pb.title} ({pb.boardSize}x{pb.boardSize})</span>
-                                                <span className={"author-pb"}>Author: {pb.author}</span>
-                                            </div>
+                                                    <span className={"author-pb"}>Author: {pb.author}</span>
+                                                </div>
                                             </Link>
                                         )
                                     }) : null}

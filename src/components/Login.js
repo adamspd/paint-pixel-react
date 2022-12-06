@@ -1,16 +1,13 @@
-import React, {useContext, useEffect, useRef, useState} from 'react'
+import React, {useEffect, useRef, useState} from 'react'
 import axios from '../utils/axios'
 import {Link, useNavigate} from 'react-router-dom';
 import '../scss/login.scss'
 import {logout, saveJwt, saveTheme, saveUser, saveUserFirstName, saveUserLastName, saveUsername} from '../utils/utils';
-import {Theme} from '../utils/Theme';
 
 
 const LOGIN_URL = '/login'
 
 function Login() {
-
-    const {theme, ChangeTheme, InitTheme} = useContext(Theme);
     let navigate = useNavigate();
 
     const userNameInput = useRef();
