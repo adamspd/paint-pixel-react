@@ -1,23 +1,26 @@
 import React, {useEffect, useState} from 'react'
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {useContext} from 'react';
 import {Theme} from '../utils/Theme';
 import PixelBoard from './PixelBoard';
 import {logout} from '../utils/utils';
 import {Sidebar} from './index'
 import '../scss/homepage.scss'
-import axios from '../utils/axios';
+import axios from "../utils/axios";
 
-function Homepage(props) {
+function EditAnyPixelBoard(props) {
     let navigate = useNavigate();
     const {theme, ChangeTheme} = useContext(Theme);
     const [pixelBoard, setPixelBoard] = useState(null);
+    // get id from url
+    const {id} = useParams();
 
     /**
      * Setting the page's title
      */
     useEffect(() => {
-        document.title = 'Painting Pixel';
+        document.title = 'Playing with the Pixels';
+        console.log("The id is " + id);
     }, []);
 
     const handeLogout = () => {
@@ -25,24 +28,22 @@ function Homepage(props) {
         navigate('/Login');
     };
 
+
+    const handeTheme = () => {
+        ChangeTheme();
+    };
+
     useEffect(() => {
-        const username = sessionStorage.getItem('user');
-        if (username !== null) {
-            axios.get('/pixelboard/byauthor/' + username + '/last').then(
+        if (id !== null) {
+            axios.get('/pixelboard/get-pb/' + id).then(
                 (response) => {
-                    const {pb} = response.data;
-                    setPixelBoard(pb[0])
-                    console.log(pb[0])
+                    console.log(response.data.data)
+                    setPixelBoard(response.data.data)
                 })
         } else {
 
         }
     }, []);
-
-
-    const handeTheme = () => {
-        ChangeTheme();
-    };
 
     return (
         <div className="homepage">
@@ -60,4 +61,4 @@ function Homepage(props) {
     )
 }
 
-export default Homepage
+export default EditAnyPixelBoard

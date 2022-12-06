@@ -2,13 +2,14 @@
 import React, {useState} from 'react';
 import {NavLink} from "react-router-dom";
 import '../scss/sidebar.scss';
-import {FaBars, FaEdit, FaHome, FaUserCog,} from 'react-icons/fa';
+import {FaBars, FaEdit, FaHome, FaUserCog, FaPaintRoller} from 'react-icons/fa';
 
 const Sidebar = ({children}) => {
     const[isOpened, setIsOpened] = useState(false);
     const toggle = () => setIsOpened(!isOpened);
     const menuItem = [
         {name: 'Home', path: '/dashboard', icon: <FaHome/>},
+        {name: 'Paint', path: '/paint', icon: <FaPaintRoller/>},
         {name: 'PixelBoardCreate', path: '/PixelBoardCreate', icon: <FaEdit/>},
         {name: 'Admin', path: '/admin', icon: <FaUserCog/>},
     ];
