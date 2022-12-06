@@ -26,10 +26,10 @@ jobs:
           key: ${{ secrets.RSA_KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            cd /home/debian/paintpixel/html
-            rm -rf *
-            cd /home/debian/paintpixel/code
+            cd /home/debian/paintpixel/code/paint-pixel-react
             git pull origin main
             npm run build
-            cp -r /home/debian/paintpixel/code/build/* /home/debian/paintpixel/html
+            cd /home/debian/paintpixel/html
+            rm -rf *
+            cp -r /home/debian/paintpixel/code/paint-pixel-react/build/* /home/debian/paintpixel/html
             sudo service nginx restart
