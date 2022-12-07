@@ -29,7 +29,8 @@ Adams Pierre David - adamspd
 
 ### Website
 The Project is deployed on [https://paintpixel.adamspierredavid.com](https://paintpixel.adamspierredavid.com).
-To do so, we created a subdomain of a domain name own by Adams, then we build the files with `npm run build`, used the command scp to copy the resulted files to a vps where Adams previously installed nginx. Then we edit the configuration of nginx to indicate the location of the files to serve when the subdomain is requested and restarted nginx.
+
+To do so, we created a subdomain of a domain name own by Adams, then we build the files with `npm run build`, used the command scp to copy the resulted files to Adams' private personal server where he previously installed nginx. Then we edit the configuration of nginx to indicate the location of the files to serve when the subdomain is requested and restarted nginx.
 
 For mongodb, we used a docker container version, both locally and on production.
 
@@ -50,18 +51,18 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm start` (For the server)
+### `npm start` or `npm run dev` (For the server)
 
-move to 'server' directory and run npm start to launch the server
+move to 'server' directory and run npm start or npm run dev to launch the server
 
 ###  `docker-compose up` (DataBase)
 move to 'mongoDB' directory and run docker-compose up to run the database container
 
 ## Database inspection 
 
-### `docker exec -it mongoPaint bash`
+### `docker exec -it mongopp bash`
 
-to interact|enter the container ('mongoPaint' is the container-name); 
+to interact|enter the container ('mongopp' is the container-name); 
 Inside the container you can run 'mongosh' to interract with the database;
 
 collections(pixelboard, user) are in `test` database
