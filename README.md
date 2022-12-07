@@ -28,7 +28,13 @@ Judicaêl Nshimiye - Judicael99
 Adams Pierre David - adamspd
 
 ### Website
-The Project is deployed on [https://paintpixel.adamspierredavid.com](https://paintpixel.adamspierredavid.com)
+The Project is deployed on [https://paintpixel.adamspierredavid.com](https://paintpixel.adamspierredavid.com).
+To do so, we created a subdomain of a domain name own by Adams, then we build the files with `npm run build`, used the command scp to copy the resulted files to a vps where Adams previously installed nginx. Then we edit the configuration of nginx to indicate the location of the files to serve when the subdomain is requested and restarted nginx.
+
+For mongodb, we used a docker container version, both locally and on production.
+
+#### Problems you may encounter
+Sometimes, we don't know the reason, we can still see the homepage when requested, but we cannot create an account or login, because axios is unavailable. If you see 0 user registered and 0 pixel board created, then axios is down and nothing can be done on the website. It resolves on its own, that is what is strange.
 
 ##  Installation
 
